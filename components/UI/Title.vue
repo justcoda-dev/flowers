@@ -1,29 +1,29 @@
 <template>
-  <h1 class="title h1" v-if="type === 'h1'">
-    <slot/>
+  <h1 class='title h1' v-if="type === 'h1'">
+    <slot />
     {{ text }}
   </h1>
-  <h2 class="title h2" v-else-if="type === 'h2'">
-    <slot/>
+  <h2 class='title h2' v-else-if="type === 'h2'">
+    <slot />
     {{ text }}
   </h2>
-  <h3 class="title h3" v-else-if="type === 'h3'">
-    <slot/>
+  <h3 class='title h3' v-else-if="type === 'h3'">
+    <slot />
     {{ text }}
   </h3>
-  <h4 class="title h4" v-else-if="type === 'h4'">
-    <slot/>
+  <h4 class='title h4' v-else-if="type === 'h4'">
+    <slot />
     {{ text }}
   </h4>
-  <h5 class="title h5" v-else>
-    <slot/>
+  <h5 class='title h5' v-else>
+    <slot />
     {{ text }}
   </h5>
 </template>
 
 <script>
 export default {
-  name: "Title",
+  name: 'Title',
   props: {
     type: {
       type: String,
@@ -33,16 +33,15 @@ export default {
       type: [String, Number],
       require: false
     }
-  },
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-@import "src/assets/colors";
-@import "src/assets/sizes";
+<style lang='scss' scoped>
+@import "assets/variables";
 
 .title {
-  color: $white;
+  color: $fontColorMain;
   padding: 0;
   margin: 0;
 }

@@ -1,34 +1,33 @@
 <template>
-  <li class="slide">
-    <div class="slide__text-wrapper">
+  <li class='slide'
+      :style='{
+    background: `url(http://localhost:1337${slide.attributes?.image?.data?.attributes?.url})`,
+    backgroundSize:"cover",
+    backgroundPosition:"center center",
+    backgroundRepeat:"no-repeat",
+    }
+'>
+    <div class='slide__text-wrapper'>
       <Title
-          class="slide__title-number"
-          type="h1"
-          :text="slide.id"
-      />
-      <Title
-          class="slide__title-title"
-          type="h5"
-          :text="slide.props?.title"
+        class='slide__title-title'
+        type='h2'
+        :text='slide.attributes?.title'
       />
       <Description
-          class="slide__title-description"
-          :text="slide.props?.text"
+        class='slide__title-description'
+        :text='slide.attributes?.text'
       />
-    </div>
-    <div class="slide__image-wrapper">
-      <img class="slide__image" :src="slide.props?.image">
     </div>
   </li>
 </template>
 
 <script>
-import Description from "@/components/UI/Description"
-import Title from "@/components/UI/Title";
+import Description from '@/components/UI/Description'
+import Title from '@/components/UI/Title'
 
 export default {
-  name: "Slide",
-  components: {Description, Title},
+  name: 'Slide',
+  components: { Description, Title },
   props: {
     slide: {
       type: Object,
@@ -38,43 +37,31 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../../assets/colors";
+<style lang='scss' scoped>
+@import "assets/variables";
 
 .slide {
-  display: flex;
-  margin: 5px;
-  flex: 1 0 300px;
+
 
   &__text-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    max-width: 50%;
-
-  }
-
-  &__title-number {
-    color: $red;
+    padding: 20px;
+    z-index: 1;
   }
 
   &__title-title {
-    color: $darkGrey;
+    font-family: 'Fira Sans', sans-serif;
+    color: $sliderTitle;
+    font-weight: 700;
   }
 
   &__title-description {
-    color: $darkGrey;
     line-height: 1.6;
+    color: $sliderText;
+    font-weight: 500;
   }
 
-  &__image-wrapper {
-    margin: auto;
-    max-width: 50%;
-  }
-
-  &__image {
-    width: 100%;
-    height: 100%;
-  }
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
-<span class="text">
-  <slot/>
+<span class='text'>
+  <slot />
   {{ text }}
 </span>
 </template>
 
 <script>
 export default {
-  name: "Description",
+  name: 'Description',
   props: {
     text: {
       type: [String, Number],
@@ -17,8 +17,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "src/assets/sizes";
+<style lang='scss' scoped>
 
 .text {
   font-size: clamp(1rem, 2vw, 1.3rem);

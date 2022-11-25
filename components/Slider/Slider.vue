@@ -1,47 +1,39 @@
-<template v-if="list">
-  <div class="slider">
-    <div class="slider-bar">
-      <ArrowButton type="left" @click="onArrowButtonClickPreviousHandler"/>
-      <ArrowButton type="right" @click="onArrowButtonClickNextHandler"/>
-    </div>
-    <ul class="slider-list">
+<template>
+  <div class='slider'>
+    <ArrowButton type='left' @click='onArrowButtonClickPreviousHandler' />
+    <ul class='slider-list'>
       <Slide
-          v-for="slide of slides[slidePageIndex]"
-          :key="slide.id"
-          :slide="slide"
+        v-for='slide of list'
+        :key='slide.id'
+        :slide='slide'
       />
     </ul>
+    <ArrowButton type='right' @click='onArrowButtonClickNextHandler' />
   </div>
 </template>
 
 <script>
 
-import Slide from "@/components/Slider/Slide";
-import ArrowButton from "@/components/UI/ArrowButton";
-
-
-import sliderDTF from "@/functions/sliderDTF"
+import Slide from '@/components/Slider/Slide'
+import ArrowButton from '@/components/UI/ArrowButton'
 
 export default {
-  name: "Slider",
-  components: {Slide, ArrowButton},
+  name: 'Slider',
+  components: { Slide, ArrowButton },
   props: {
     list: {
       type: Array,
-      require: true,
+      require: true
     }
   },
   data: () => {
     return {
-      itemsInSlide: 2,
+      itemsInSlide: 1,
       slidePageIndex: 0,
       sliderInterval: 0
     }
   },
   computed: {
-    slides() {
-      return sliderDTF(this.list, this.itemsInSlide)
-    },
     maxPages() {
       return (this.list?.length / this.itemsInSlide) - 1
     }
@@ -55,6 +47,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.list)
     this.sliderInterval = setInterval(() => {
       this.onArrowButtonClickNextHandler()
     }, 10000)
@@ -65,26 +58,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../../assets/colors";
+<style lang='scss' scoped>
+@import "assets/variables";
 
 .slider {
-  display: flex;
-  flex-direction: column;
-  padding: 0 50px 50px 50px;
-
-  .slider-bar {
-    align-self: flex-end;
-    margin-bottom: 20px;
-
-    &__title {
-      color: $darkGrey;
-    }
-  }
+  height: 100%;
+  max-height: 620px;
 
   .slider-list {
-    display: flex;
-    flex-wrap: wrap;
     list-style: none;
     padding: 0;
     margin: 0;
