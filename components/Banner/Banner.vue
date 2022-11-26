@@ -1,0 +1,84 @@
+<template>
+  <div class="banner">
+    <figure class="banner__image-wrapper">
+      <img class="banner__image"
+           :src="`http://localhost:1337${banner.attributes?.image?.data?.attributes?.url}`" alt="">
+      <Title class="banner__title" type="h3" :text="banner.attributes?.title"/>
+      <NuxtLink class="banner__link" :to="banner.attributes?.to">Переглянути</NuxtLink>
+    </figure>
+  </div>
+</template>
+
+<script>
+import Title from "@/components/UI/Title";
+
+export default {
+  name: "Banner",
+  components: {Title},
+  props: {
+    banner: {
+      type: Object,
+      require: true
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "assets/variables";
+
+.banner {
+  font-family: 'Fira Sans', sans-serif;
+  margin: 15px;
+  display: flex;
+  flex: 1 0 280px;
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    transition: .5s ease-in;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__image-wrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__title {
+    position: absolute;
+    z-index: 1;
+    top: 25%;
+    left: 10%;
+    color: $sliderTitle;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: .7;
+    transition: .3s;
+  }
+
+  &__link {
+    position: absolute;
+    z-index: 1;
+    top: 55%;
+    left: 10%;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: $sliderTitle;
+    text-transform: uppercase;
+    opacity: .7;
+    transition: .3s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+</style>

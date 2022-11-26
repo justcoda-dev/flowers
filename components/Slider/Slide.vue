@@ -3,19 +3,19 @@
       :style='{
     background: `url(http://localhost:1337${slide.attributes?.image?.data?.attributes?.url})`,
     backgroundSize:"cover",
-    backgroundPosition:"center center",
+    backgroundPosition:"center",
     backgroundRepeat:"no-repeat",
     }
 '>
     <div class='slide__text-wrapper'>
       <Title
-        class='slide__title-title'
-        type='h2'
-        :text='slide.attributes?.title'
+          class='slide__title-title'
+          type='h2'
+          :text='slide.attributes?.title'
       />
       <Description
-        class='slide__title-description'
-        :text='slide.attributes?.text'
+          class='slide__title-description'
+          :text='slide.attributes?.text'
       />
     </div>
   </li>
@@ -27,7 +27,7 @@ import Title from '@/components/UI/Title'
 
 export default {
   name: 'Slide',
-  components: { Description, Title },
+  components: {Description, Title},
   props: {
     slide: {
       type: Object,
@@ -41,13 +41,15 @@ export default {
 @import "assets/variables";
 
 .slide {
-
+  height: 100%;
+  display: flex;
+  align-items: center;
 
   &__text-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 20px;
+    margin: 50px;
     z-index: 1;
   }
 

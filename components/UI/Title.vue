@@ -64,12 +64,12 @@ export default {
 
 .h4 {
   font-size: clamp(1.8rem, 10vw, 2.5rem);
-  font-weight: 900;
+  font-weight: 500;
 }
 
 .h5 {
   font-size: clamp(1.6rem, 10vw, 2.2rem);
-  font-weight: 900;
+  font-weight: 500;
 }
 
 </style>

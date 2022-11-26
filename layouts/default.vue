@@ -35,6 +35,8 @@ export default {
   flex-direction: column;
   min-height: 100%;
   background: $mainBackground;
+  margin: 25px;
+  position: relative;
 
   .content {
     flex: 1 0 auto;

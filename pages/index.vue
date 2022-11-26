@@ -1,34 +1,107 @@
 <template>
   <div class='main-page'>
     <Slider class='main-page__slider' :list='slides'/>
+    <div class="main-page__features">
+      <TextWithImage
+        v-for="feature of features"
+        :key="feature.id"
+        :item="feature"
+      />
+    </div>
+    <div class="main-page__category-banners">
+      <Banner
+        v-for="banner of categoryBanners"
+        :key="banner.id"
+        :banner="banner"
+      />
+    </div>
+    <SalesBanner class="main-page__sales-banner" :banner="saleBanner"/>
+    <div class="main-page__product-list">
+      <Product v-for="product of products" :product="product" :key="product.id"/>
+    </div>
   </div>
 </template>
 
 <script>
+import Banner from "~/components/Banner/Banner";
+import Product from "~/components/Product/Product";
+import SalesBanner from "~/components/SalesBanner/SalesBanner";
 import Slider from '~/components/Slider/Slider'
+import TextWithImage from "~/components/UI/TextWithImage";
 
 export default {
   name: 'IndexPage',
-  components: {Slider},
+  components: {Product, SalesBanner, Banner, TextWithImage, Slider},
   layout: 'default',
   data: () => {
     return {
-      slides: []
+      slides: [],
+      features: [],
+      categoryBanners: [],
+      products: [],
+      saleBanner: {}
     }
   },
 
   async created() {
     const {data: slides} = await this.$axios.$get('slides?populate=image')
+    const {data: features} = await this.$axios.$get('features?populate=image')
+    const {data: categoryBanners} = await this.$axios.$get('category-banners?populate=image')
+    const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
+    const {data: products} = await this.$axios.$get('flower-pots?populate=image')
+
     this.slides = slides
+    this.features = features
+    this.categoryBanners = categoryBanners
+    this.saleBanner = saleBanner
+    this.products = products
+
+    console.log(products)
   }
 
 }
 </script>
 <style lang='scss'>
 .main-page {
+  height: 100%;
+  box-sizing: border-box;
+
+  // slider
   &__slider {
-    height: 1px;
+    height: 100%;
+    min-height: 600px;
+    margin: 15px;
   }
+
+  //  /slider
+  //  features
+  &__features {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+  }
+
+  //  /features
+  //  banners
+  &__category-banners {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  //  /banners
+  //  sales-banner
+  &__sales-banner {
+    margin: 15px;
+  }
+
+  //  /sales-banner
+  //  products-list
+  &__product-list {
+    display: flex;
+  }
+
+  //  /products-list
 }
 </style>
 <!--populate-->

@@ -7,7 +7,7 @@
       <path
         class='button-arrow__path'
         d='M-4.76837e-06 13.6493L5.63692 8.00009L-4.76837e-06 2.35086L1.73538 0.615479L9.12 8.00009L1.73538 15.3847L-4.76837e-06 13.6493Z'
-        fill='#20212E' />
+        fill='#20212E'/>
     </svg>
     <!--/right-->
     <!--left-->
@@ -16,7 +16,7 @@
       <path
         class='button-arrow__path'
         d='M9.9231 13.6493L4.28618 8.00009L9.9231 2.35086L8.18772 0.615479L0.803101 8.00009L8.18772 15.3847L9.9231 13.6493Z'
-        fill='#20212E' />
+        fill='#20212E'/>
     </svg>
     <!--/left-->
   </button>
@@ -66,14 +66,21 @@ export default {
   background: none;
   border: none;
   cursor: pointer;
+  background: #222222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+
+  &:hover {
+    .button-arrow__path {
+      fill: $fontColorMain;
+    }
+  }
 
   &__path {
     transition: .3s;
-    fill: #333333;
-
-    &:hover {
-      fill: $fontColorMain;
-    }
+    fill: #474747;
   }
 }
 </style>

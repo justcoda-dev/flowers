@@ -3,11 +3,13 @@
     <div class='header__logo'>
       <div class='header__logo-text'>Знижка на 10 замовлення 15%</div>
       <div class='header__logo-image'><h2>КВІТНИЧОК</h2></div>
-      <div class='header__logo-search'>_______search</div>
+      <!--      <div class='header__logo-search'>_______search</div>-->
     </div>
     <div class='header__nav'>
-      <ButtonIcon />
-      <nav class='nav-list-desktop'>
+      <ButtonHome v-if="!mobile" @click="onHomeButtonClick"/>
+      <MobileNavMenu v-if="mobile" class="nav-list-mobile" :showToggle="onMobileButtonToggle"
+                     :list="navList"/>
+      <nav v-else class='nav-list-desktop'>
         <NuxtLink
           class='nav-list-desktop__item'
           v-for='navItem of navList'
@@ -15,24 +17,62 @@
           :to='navItem.attributes?.to'>
           {{ navItem.attributes?.title }}
         </NuxtLink>
+
       </nav>
-      <div class='nav-list-mobile'></div>
-      <ButtonIcon />
+      <ButtonCart class="header__cart"/>
     </div>
   </header>
 </template>
 
 <script>
+import MobileNavMenu from "~/components/MobileNavMenu/MobileNavMenu";
+import ButtonCart from "~/components/UI/ButtonCart";
+import ButtonHome from "~/components/UI/ButtonHome";
 import ButtonIcon from '~/components/UI/ButtonIcon'
+import {debounce} from "~/functions/debounce";
 
 export default {
   name: 'Header',
-  components: { ButtonIcon },
+  components: {ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon},
   props: {
     navList: {
       type: Array,
       require: true
     }
+  },
+  data: () => {
+    return {
+      mobile: false,
+      showMobileMenu: false,
+      debounceTime: 100,
+      mobileMode: 900
+    }
+  },
+  methods: {
+    onMobileButtonToggle() {
+      this.showMobileMenu = !this.showMobileMenu
+    },
+    windowsWidthWatching() {
+      const debouncedFn = debounce(({target: {innerWidth}}) => {
+
+        if (innerWidth < this.mobileMode) {
+          this.mobile = true
+        } else {
+          this.mobile = false
+        }
+      }, this.debounceTime)
+      window.addEventListener("resize", debouncedFn)
+    },
+    onHomeButtonClick() {
+      this.$router.push("/")
+    }
+
+  },
+  created() {
+
+  },
+  mounted() {
+    this.windowsWidthWatching()
   }
 }
 </script>
@@ -71,7 +111,12 @@ export default {
 
   &__nav {
     display: flex;
+    justify-content: space-between;
     background: $headerNavBackground;
+    min-height: 50px;
+  }
+  &__cart {
+    justify-self: flex-end;
   }
 }
 
@@ -97,5 +142,9 @@ export default {
       color: #333333;
     }
   }
+}
+
+.nav-list-mobile {
+  padding: 0 20px;
 }
 </style>
