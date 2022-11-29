@@ -1,7 +1,7 @@
 <template>
   <li class='slide'
       :style='{
-    background: `url(http://localhost:1337${slide.attributes?.image?.data?.attributes?.url})`,
+    background: `url(https://kvitnychok.herokuapp.com/${slide.attributes?.image?.data?.attributes?.url})`,
     backgroundSize:"cover",
     backgroundPosition:"center",
     backgroundRepeat:"no-repeat",
@@ -9,13 +9,13 @@
 '>
     <div class='slide__text-wrapper'>
       <Title
-          class='slide__title-title'
-          type='h2'
-          :text='slide.attributes?.title'
+        class='slide__title-title'
+        type='h2'
+        :text='slide.attributes?.title'
       />
       <Description
-          class='slide__title-description'
-          :text='slide.attributes?.text'
+        class='slide__title-description'
+        :text='slide.attributes?.text'
       />
     </div>
   </li>
@@ -33,7 +33,7 @@ export default {
       type: Object,
       require: true
     }
-  }
+  },
 }
 </script>
 
