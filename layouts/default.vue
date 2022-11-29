@@ -1,6 +1,6 @@
 <template>
   <div class='layout'>
-    <Header :nav-list='navList' :cart="getCart" :cartCount="getCartCount"/>
+    <Header style="position: sticky" :nav-list='navList' :cart="getCart" :cartCount="getCartCount"/>
     <div class='content'>
       <Nuxt/>
     </div>
@@ -24,7 +24,25 @@ export default {
         {id: 2, to: "/services", title: "Послуги"},
         {id: 3, to: "/cart", title: "Корзина"},
         {id: 4, to: "/contacts", title: "Контакти"}],
-      socialList: []
+      socialList: [
+        {
+          id: 1,
+          name: "Facebook",
+          link: "facebook.com",
+          icon: `${require(`assets/icons/icons8-facebook.svg`)}`
+        },
+        {
+          id: 2,
+          name: "Instagram",
+          link: "instagram.com",
+          icon: `${require(`assets/icons/icons8-instagram.svg`)}`
+        },
+        {
+          id: 3,
+          name: "TikTok",
+          link: "tiktok.com",
+          icon: `${require(`assets/icons/icons8-tiktok.svg`)}`
+        }]
     }
   },
   computed: {
@@ -33,9 +51,9 @@ export default {
   async created() {
     try {
       // const {data: navList} = await this.$axios.$get('nav-items')
-      const {data: socialList} = await this.$axios.$get('socials?populate=icon')
+      // const {data: socialList} = await this.$axios.$get('socials?populate=icon')
       // this.navList = navList
-      this.socialList = socialList
+      // this.socialList = socialList
     } catch (e) {
       console.error("default layout error:", e)
     }
@@ -53,6 +71,9 @@ export default {
   background: $mainBackground;
   margin: 25px;
   position: relative;
+  @media screen and (max-width: 900px) {
+    margin: 0;
+  }
 
   .content {
     flex: 1 0 auto;

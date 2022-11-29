@@ -41,7 +41,17 @@ export default {
   data: () => {
     return {
       slides: [],
-      features: [],
+      features: [{
+        id: 1, title: "Актуальні ціни", image: `${require(`assets/icons/dollar-symbol.png`)}`
+      }, {
+        id: 2, title: "Доставка квітів", image: `${require(`assets/icons/cargo-truck.png`)}`
+      }, {
+        id: 3,
+        title: "Завжди на звя'зку +38096 901 86 77",
+        image: `${require(`assets/icons/phone-call.png`)}`
+      }, {
+        id: 4, title: "Завжди свіжі квіти!", image: `${require(`assets/icons/bouquet.png`)}`
+      },],
       categoryBanners: [],
       products: [],
       saleBanner: {},
@@ -54,7 +64,7 @@ export default {
   async created() {
     try {
       const {data: slides} = await this.$axios.$get('slides?populate=image')
-      const {data: features} = await this.$axios.$get('features?populate=image')
+      // const {data: features} = await this.$axios.$get('features?populate=image')
       const {data: categoryBanners} = await this.$axios.$get('category-banners?populate=image')
       const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
       const {data: products} = await this.$axios.$get('flower-pots?populate=image')
@@ -62,11 +72,12 @@ export default {
 
 
       this.slides = slides
-      this.features = features
+      // this.features = features
       this.categoryBanners = categoryBanners
       this.saleBanner = saleBanner
       this.products = products
       this.comments = comments
+  console.log(comments)
     } catch (e) {
       console.error("index page error,", e)
     }
@@ -113,6 +124,10 @@ export default {
   //  products-list
   &__product-list {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
   }
 
   //  /products-list

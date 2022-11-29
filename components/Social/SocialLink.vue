@@ -1,7 +1,7 @@
 <template>
-  <a class="link" :href="social.attributes?.link" target="_blank">
+  <a class="link" :href="social.link" target="_blank">
     <img class="link__image"
-         :src="`http://localhost:1337${social.attributes?.icon?.data?.attributes?.url}`">
+         :src="social.icon">
   </a>
 </template>
 

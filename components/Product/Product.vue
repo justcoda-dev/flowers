@@ -56,7 +56,7 @@ export default {
   width: 100%;
   border: 1px solid $bodyBackground;
   border-radius: 5px;
-
+max-width: 200px;
   &__image {
     position: relative;
     width: 100%;
