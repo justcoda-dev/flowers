@@ -1,6 +1,6 @@
 <template>
   <div class='layout'>
-    <Header style="position: sticky" :nav-list='navList' :cart="getCart" :cartCount="getCartCount"/>
+    <Header :nav-list='navList' :cart="getCart" :cartCount="getCartCount"/>
     <div class='content'>
       <Nuxt/>
     </div>
