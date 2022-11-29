@@ -2,7 +2,7 @@
   <div class="product" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <div class="product__image">
       <img
-        :src="`http://localhost:1337${product.attributes?.image?.data?.attributes?.url}`" alt="">
+        :src="`https://kvitnychok.herokuapp.com${product.attributes?.image?.data?.attributes?.url}`" alt="">
     </div>
     <div class="product__text-wrapper">
       <p class="product__title">{{ product.attributes?.title }}</p>

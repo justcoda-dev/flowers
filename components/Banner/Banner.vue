@@ -2,7 +2,7 @@
   <div class="banner">
     <figure class="banner__image-wrapper">
       <img class="banner__image"
-           :src="`http://localhost:1337${banner.attributes?.image?.data?.attributes?.url}`" alt="">
+           :src="`https://kvitnychok.herokuapp.com${banner.attributes?.image?.data?.attributes?.url}`" alt="">
       <Title class="banner__title" type="h3" :text="banner.attributes?.title"/>
       <NuxtLink class="banner__link" :to="banner.attributes?.to">Переглянути</NuxtLink>
     </figure>

@@ -1,7 +1,7 @@
 <template>
   <li class='slide'
       :style='{
-    background: `url(https://kvitnychok.herokuapp.com/${slide.attributes?.image?.data?.attributes?.url})`,
+    background: `url(https://kvitnychok.herokuapp.com${slide.attributes?.image?.data?.attributes?.url})`,
     backgroundSize:"cover",
     backgroundPosition:"center",
     backgroundRepeat:"no-repeat",
@@ -34,6 +34,7 @@ export default {
       require: true
     }
   },
+
 }
 </script>
 

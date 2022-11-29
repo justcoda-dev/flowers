@@ -1,7 +1,7 @@
 <template>
   <div class="sales-banner">
     <img class="sales-banner__image"
-         :src="`http://localhost:1337${banner.attributes?.image?.data?.attributes?.url}`"
+         :src="`https://kvitnychok.herokuapp.com${banner.attributes?.image?.data?.attributes?.url}`"
          alt="">
     <div class="sales-banner__text-block">
       <Title class="sales-banner__title-name">Акція</Title>
