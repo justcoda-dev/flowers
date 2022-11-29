@@ -3,7 +3,6 @@
     <div class='header__logo'>
       <div class='header__logo-text'>Знижка на 10 замовлення 15%</div>
       <div class='header__logo-image'><h2>КВІТНИЧОК</h2></div>
-      <!--      <div class='header__logo-search'>_______search</div>-->
     </div>
     <div class='header__nav'>
       <ButtonHome v-if="!mobile" @click="onHomeButtonClick"/>
@@ -14,17 +13,18 @@
           class='nav-list-desktop__item'
           v-for='navItem of navList'
           :key='navItem.id'
-          :to='navItem.attributes?.to'>
-          {{ navItem.attributes?.title }}
+          :to='navItem.to'>
+          {{ navItem.title }}
         </NuxtLink>
 
       </nav>
-      <ButtonCart class="header__cart"/>
+      <CartHeader :cartCount="cartCount" :productsList="cart"/>
     </div>
   </header>
 </template>
 
 <script>
+import CartHeader from "~/components/Cart/CartHeader";
 import MobileNavMenu from "~/components/MobileNavMenu/MobileNavMenu";
 import ButtonCart from "~/components/UI/ButtonCart";
 import ButtonHome from "~/components/UI/ButtonHome";
@@ -33,11 +33,19 @@ import {debounce} from "~/functions/debounce";
 
 export default {
   name: 'Header',
-  components: {ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon},
+  components: {CartHeader, ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon},
   props: {
     navList: {
       type: Array,
       require: true
+    },
+    cart: {
+      type: Array,
+      require: true
+    },
+    cartCount: {
+      type: Number,
+      require: false
     }
   },
   data: () => {
@@ -115,6 +123,7 @@ export default {
     background: $headerNavBackground;
     min-height: 50px;
   }
+
   &__cart {
     justify-self: flex-end;
   }

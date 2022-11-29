@@ -14,3 +14,8 @@ body {
   background: #ecf7f9;
   color: #3f4960;
 }
+
+p {
+  margin: 0;
+  padding: 0;
+}

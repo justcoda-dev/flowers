@@ -1,12 +1,12 @@
 <template>
-  <button @click="onClick" class="button-add">
+  <button class="button-confirm" @click="onClick">
     <slot/>
   </button>
 </template>
 
 <script>
 export default {
-  name: "ButtonAdd",
+  name: "ButtonConfirm",
   methods: {
     onClick() {
       this.$emit("click")
@@ -18,14 +18,12 @@ export default {
 <style lang="scss" scoped>
 @import "assets/variables";
 
-.button-add {
+.button-confirm {
   background: $buttonRed;
-  border: none;
-  //text-transform: uppercase;
+  border: 1px solid $headerNavListBackground;
   color: $white;
-  font-size: 1rem;
-  border-radius: 999px;
-  padding: 10px 20px;
   cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 3px;
 }
 </style>

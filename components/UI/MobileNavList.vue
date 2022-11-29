@@ -3,8 +3,8 @@
     <li class="mobile-nav-list__item" @click="onNavItemClick" v-for="item of list" :key="item.id">
       <NuxtLink
         class="mobile-nav-list__item-src"
-        :to="item.attributes?.to">
-        {{ item.attributes?.title }}
+        :to="item.to">
+        {{ item.title }}
       </NuxtLink>
     </li>
   </ul>

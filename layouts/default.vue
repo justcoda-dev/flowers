@@ -1,10 +1,10 @@
 <template>
   <div class='layout'>
-    <Header :nav-list='navList'/>
+    <Header :nav-list='navList' :cart="getCart" :cartCount="getCartCount"/>
     <div class='content'>
       <Nuxt/>
     </div>
-    <Footer/>
+    <Footer :socialList="socialList"/>
   </div>
 </template>
 
@@ -12,17 +12,33 @@
 import Footer from '~/components/Footer/Footer'
 import Header from '~/components/Header/Header'
 
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'default',
   components: {Footer, Header},
   data: () => {
     return {
-      navList: []
+      navList: [
+        {id: 1, to: "/flower-pots", title: "Вазони"},
+        {id: 2, to: "/services", title: "Послуги"},
+        {id: 3, to: "/cart", title: "Корзина"},
+        {id: 4, to: "/contacts", title: "Контакти"}],
+      socialList: []
     }
   },
+  computed: {
+    ...mapGetters({getCart: "cart/getCart", getCartCount: "cart/getCartCount"})
+  },
   async created() {
-    const {data: navList} = await this.$axios.$get('nav-items')
-    this.navList = navList
+    try {
+      // const {data: navList} = await this.$axios.$get('nav-items')
+      const {data: socialList} = await this.$axios.$get('socials?populate=icon')
+      // this.navList = navList
+      this.socialList = socialList
+    } catch (e) {
+      console.error("default layout error:", e)
+    }
   }
 }
 </script>

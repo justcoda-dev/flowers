@@ -15,23 +15,28 @@
         :banner="banner"
       />
     </div>
-    <SalesBanner class="main-page__sales-banner" :banner="saleBanner"/>
     <div class="main-page__product-list">
-      <Product v-for="product of products" :product="product" :key="product.id"/>
+      <Product @addProduct="addProduct" v-for="product of products" :product="product"
+               :key="product.id"/>
     </div>
+    <SalesBanner class="main-page__sales-banner" :banner="saleBanner"/>
+    <Comments :comments="comments"/>
   </div>
 </template>
 
 <script>
 import Banner from "~/components/Banner/Banner";
+import Comments from "~/components/Comments/Comments";
 import Product from "~/components/Product/Product";
 import SalesBanner from "~/components/SalesBanner/SalesBanner";
 import Slider from '~/components/Slider/Slider'
 import TextWithImage from "~/components/UI/TextWithImage";
 
+import {mapActions} from "vuex"
+
 export default {
   name: 'IndexPage',
-  components: {Product, SalesBanner, Banner, TextWithImage, Slider},
+  components: {Comments, Product, SalesBanner, Banner, TextWithImage, Slider},
   layout: 'default',
   data: () => {
     return {
@@ -39,24 +44,33 @@ export default {
       features: [],
       categoryBanners: [],
       products: [],
-      saleBanner: {}
+      saleBanner: {},
+      comments: [],
     }
   },
-
+  methods: {
+    ...mapActions({addProduct: "cart/addProduct"})
+  },
   async created() {
-    const {data: slides} = await this.$axios.$get('slides?populate=image')
-    const {data: features} = await this.$axios.$get('features?populate=image')
-    const {data: categoryBanners} = await this.$axios.$get('category-banners?populate=image')
-    const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
-    const {data: products} = await this.$axios.$get('flower-pots?populate=image')
+    try {
+      const {data: slides} = await this.$axios.$get('slides?populate=image')
+      const {data: features} = await this.$axios.$get('features?populate=image')
+      const {data: categoryBanners} = await this.$axios.$get('category-banners?populate=image')
+      const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
+      const {data: products} = await this.$axios.$get('flower-pots?populate=image')
+      const {data: comments} = await this.$axios.$get('comments?populate=icon')
 
-    this.slides = slides
-    this.features = features
-    this.categoryBanners = categoryBanners
-    this.saleBanner = saleBanner
-    this.products = products
 
-    console.log(products)
+      this.slides = slides
+      this.features = features
+      this.categoryBanners = categoryBanners
+      this.saleBanner = saleBanner
+      this.products = products
+      this.comments = comments
+    } catch (e) {
+      console.error("index page error,", e)
+    }
+
   }
 
 }

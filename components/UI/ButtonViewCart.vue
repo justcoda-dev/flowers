@@ -1,12 +1,12 @@
 <template>
-  <button @click="onClick" class="button-add">
+  <button class="button-view-cart" @click="onClick">
     <slot/>
   </button>
 </template>
 
 <script>
 export default {
-  name: "ButtonAdd",
+  name: "ButtonViewCart",
   methods: {
     onClick() {
       this.$emit("click")
@@ -18,14 +18,12 @@ export default {
 <style lang="scss" scoped>
 @import "assets/variables";
 
-.button-add {
-  background: $buttonRed;
-  border: none;
-  //text-transform: uppercase;
-  color: $white;
-  font-size: 1rem;
-  border-radius: 999px;
-  padding: 10px 20px;
+.button-view-cart {
+  background: $white;
+  border: 1px solid #ddd;
+  text-transform: uppercase;
+  padding: 8px 20px;
   cursor: pointer;
+  border-radius: 3px;
 }
 </style>
