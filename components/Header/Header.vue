@@ -62,13 +62,16 @@ export default {
     },
     windowsWidthWatching() {
       const debouncedFn = debounce(({target: {innerWidth}}) => {
-
+        console.log(innerWidth)
         if (innerWidth < this.mobileMode) {
           this.mobile = true
         } else {
           this.mobile = false
         }
       }, this.debounceTime)
+      if (window.innerWidth < this.mobileMode) {
+        this.mobile = true
+      }
       window.addEventListener("resize", debouncedFn)
     },
     onHomeButtonClick() {

@@ -1,7 +1,7 @@
 <template>
   <div class="image-with-text">
     <img class="image-with-text__image"
-         :src="`http://localhost:1337${item.attributes.image?.data?.attributes?.url}`" alt="">
+         :src="`https://kvitnychok.herokuapp.com${item.attributes.image?.data?.attributes?.url}`" alt="">
     <span class="image-with-text__text">{{ item.attributes?.title }}</span>
   </div>
 </template>
