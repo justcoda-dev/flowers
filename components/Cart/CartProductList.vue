@@ -2,12 +2,12 @@
   <ul class="cart-list">
     <li class="cart-list__item" v-for="product of list">
       <img class="cart-list__item-image"
-           :src="`https://kvitnychok.herokuapp.com${product.attributes?.image?.data?.attributes?.url}`" alt="">
+           :src="product.attributes?.image?.data?.attributes?.url" alt="">
       <div class="cart-list__item-description">
         <p class="cart-list__item-title">{{ product.attributes?.title }}</p>
-        <p class="cart-list__item-count">Усього {{ product.attributes?.count }} шт x
+        <p class="cart-list__item-count"> {{ product.attributes?.count }} шт x
           {{ product.attributes?.price }} грн</p>
-<!--        <p class="cart-list__item-total-price">ціна грн</p>-->
+        <!--        <p class="cart-list__item-total-price">ціна грн</p>-->
       </div>
     </li>
   </ul>
@@ -62,7 +62,6 @@ export default {
   }
 
   &__item-total-price {
-
   }
 }
 

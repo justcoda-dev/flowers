@@ -5,12 +5,14 @@
     <ArrowButton v-if="showArrowButton" class="slider__right-btn" type='right'
                  @click='onArrowButtonClickNextHandler'/>
     <ul class='slider-list'>
-      <Slide
-        v-for='(slide, index) of list'
-        :key='slide.id'
-        :slide='slide'
-        v-if="slidePageIndex === index"
-      />
+      <transition name="slide" mode="out-in">
+        <Slide
+          v-for='(slide, index) of list'
+          :key='slide.id'
+          :slide='slide'
+          v-if="slidePageIndex === index"
+        />
+      </transition>
     </ul>
 
   </div>
@@ -55,7 +57,8 @@ export default {
     },
     onSliderMouseLeave() {
       this.showArrowButton = false
-    }
+
+    },
   },
   mounted() {
     this.sliderInterval = setInterval(() => {
@@ -113,6 +116,22 @@ export default {
   }
 
 
+  @media screen and (max-width: $mediaSWidth) {
+    min-height: 200px;
+    .slider-list {
+      height: 100%;
+    }
+  }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
 }
 
 @keyframes smoothAnimation {
@@ -123,4 +142,6 @@ export default {
     opacity: .7;
   }
 }
+
+
 </style>

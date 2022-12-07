@@ -1,6 +1,6 @@
 <template>
   <div class="mobile-menu">
-    <MobileButton @change="showToggle" class="mobile-menu__button"/>
+    <MobileButton :checkedProp="showMenu" @change="showToggle" class="mobile-menu__button"/>
     <div v-if="showMenu" class="mobile-menu__nav-list-background">
       <MobileNavList @click="onMenuItemClick" :list="list" class="mobile-menu__nav-list"/>
     </div>
@@ -31,7 +31,6 @@ export default {
       this.showMenu = !this.showMenu
     },
     onMenuItemClick() {
-      console.log("click")
       this.showMenu = false
     }
   }
@@ -42,11 +41,11 @@ export default {
 @import "assets/variables";
 
 .mobile-menu {
+  z-index: 10;
   &__nav-list-background {
     position: fixed;
     height: calc(100vh + 30px);
     width: calc(100vw + 30px);
-    z-index: 10;
     left: 0;
     top: 0;
     overflow: hidden;

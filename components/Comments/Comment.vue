@@ -1,7 +1,7 @@
 <template>
   <div class="comment">
     <img class="comment__image"
-         :src="`https://kvitnychok.herokuapp.com${comment.attributes?.icon?.data?.attributes?.url}`"
+         :src="comment.attributes?.icon?.data?.attributes?.url"
          alt="loading...">
     <p class="comment__comment">{{ comment.attributes?.comment }}</p>
     <span class="comment__user">{{ fullName }}</span>

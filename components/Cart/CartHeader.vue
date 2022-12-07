@@ -5,8 +5,9 @@
       <CartProductList class="cart-header__list" v-if="productsList.length" :list="productsList"/>
       <p v-else>Корзина пуста</p>
       <div class="cart-header__buttons">
-        <ButtonConfirm @click="onConfirm">Confirm</ButtonConfirm>
-        <ButtonViewCart @click="onViewCart">View Cart</ButtonViewCart>
+        <!--        <ButtonConfirm @click="onConfirm">Підтвердити</ButtonConfirm>-->
+        <span><b>Загальна вартість:</b> {{ cartFullPrice }}грн</span>
+        <ButtonViewCart @click="onViewCart">Корзина</ButtonViewCart>
       </div>
     </div>
   </div>
@@ -30,6 +31,10 @@ export default {
     cartCount: {
       type: Number,
       require: false
+    },
+    cartFullPrice: {
+      type: [Number, String],
+      require: true
     }
   },
   data: () => {
@@ -49,10 +54,12 @@ export default {
     },
     onConfirm() {
       this.showList = false
+      this.$router.push("/form")
       //  redirect to form
     },
     onViewCart() {
       this.showList = false
+      this.$router.push("/cart")
     }
   }
 }
@@ -75,13 +82,18 @@ export default {
     z-index: 5;
     right: 15px;
     top: 80px;
-    width: 300px;
+    width: 400px;
     padding: 10px;
+    box-shadow: 2px 2px 4px #333333;
+    @media screen and (max-width: $mediaSWidth) {
+      width: 250px;
+    }
   }
 
   &__buttons {
     justify-self: flex-end;
     display: flex;
+    align-items: center;
     justify-content: space-around;
   }
 }

@@ -1,13 +1,16 @@
 <template>
   <div class="sales-banner">
     <img class="sales-banner__image"
-         :src="`https://kvitnychok.herokuapp.com${banner.attributes?.image?.data?.attributes?.url}`"
+         :src="banner.attributes?.image?.data?.attributes?.url"
          alt="">
     <div class="sales-banner__text-block">
       <Title class="sales-banner__title-name">Акція</Title>
       <Title class="sales-banner__title-text" type="h3" :text="banner.attributes?.title"/>
-      <p class="sales-banner__date">Акція дійсна до {{ banner.attributes?.valid_until }} </p>
-      <ButtonGreen>Замовити</ButtonGreen>
+      <ButtonGreen>
+        <NuxtLink :style="{color: 'white'}" to="flower-pots/orchid">
+          Замовити
+        </NuxtLink>
+      </ButtonGreen>
     </div>
   </div>
 </template>
@@ -29,12 +32,6 @@ export default {
     return {
       timer: 0
     }
-  },
-  methods: {},
-  created() {
-  },
-  mounted() {
-    console.log(this.banner.attributes?.title)
   }
 }
 </script>
@@ -48,7 +45,9 @@ export default {
   display: flex;
   height: 450px;
   background: $bodyBackground;
-
+@media screen and (max-width: $mediaSWidth) {
+  height: 350px;
+}
   &__image {
     object-fit: cover;
     object-position: center;

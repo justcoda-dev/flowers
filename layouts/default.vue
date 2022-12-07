@@ -1,6 +1,6 @@
 <template>
   <div class='layout'>
-    <Header :nav-list='navList' :cart="getCart" :cartCount="getCartCount"/>
+    <Header :nav-list='navList' :cartFullPrice="getCartFullPrice" :cart="getCart" :cartCount="getCartCount"/>
     <div class='content'>
       <Nuxt/>
     </div>
@@ -20,8 +20,8 @@ export default {
   data: () => {
     return {
       navList: [
-        {id: 1, to: "/flower-pots", title: "Вазони"},
-        {id: 2, to: "/services", title: "Послуги"},
+        {id: 1, to: "/", title: "Головна"},
+        {id: 2, to: "/flower-pots", title: "Вазони"},
         {id: 3, to: "/cart", title: "Корзина"},
         {id: 4, to: "/contacts", title: "Контакти"}],
       socialList: [
@@ -46,7 +46,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({getCart: "cart/getCart", getCartCount: "cart/getCartCount"})
+    ...mapGetters({getCart: "cart/getCart", getCartCount: "cart/getCartCount", getCartFullPrice:"cart/cartFullPrice"})
   },
   async created() {
     try {
@@ -72,7 +72,7 @@ export default {
   margin: 25px;
   position: relative;
   @media screen and (max-width: 900px) {
-    margin: 0;
+    margin: 15px;
   }
 
   .content {

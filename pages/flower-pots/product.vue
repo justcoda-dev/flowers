@@ -1,12 +1,12 @@
 <template>
-  <div class="services">
-    services
+  <div>
+    <nuxt-child/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "index"
+  name: "product"
 }
 </script>
 

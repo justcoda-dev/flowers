@@ -8,6 +8,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.contacts {
+  height: 50vh;
+}
 </style>

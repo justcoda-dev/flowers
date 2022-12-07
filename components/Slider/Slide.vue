@@ -1,10 +1,7 @@
 <template>
-  <li class='slide'
+  <li  class='slide'
       :style='{
-    background: `url(https://kvitnychok.herokuapp.com${slide.attributes?.image?.data?.attributes?.url})`,
-    backgroundSize:"cover",
-    backgroundPosition:"center",
-    backgroundRepeat:"no-repeat",
+    background: `url(${slide.attributes?.image?.data?.attributes?.url})`,
     }
 '>
     <div class='slide__text-wrapper'>
@@ -18,7 +15,7 @@
         :text='slide.attributes?.text'
       />
     </div>
-  </li>
+  </li >
 </template>
 
 <script>
@@ -35,6 +32,7 @@ export default {
     }
   },
 
+
 }
 </script>
 
@@ -45,6 +43,9 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 
   &__text-wrapper {
     display: flex;
@@ -66,5 +67,8 @@ export default {
     font-weight: 500;
   }
 
+  @media screen and (max-width: $mediaSWidth) {
+
+  }
 }
 </style>

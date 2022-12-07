@@ -1,26 +1,27 @@
 <template>
   <div class='main-page'>
     <Slider class='main-page__slider' :list='slides'/>
-    <div class="main-page__features">
+    <div class="main-page__features container">
       <TextWithImage
         v-for="feature of features"
         :key="feature.id"
         :item="feature"
       />
     </div>
-    <div class="main-page__category-banners">
+    <div class="main-page__category-banners container">
       <Banner
-        v-for="banner of categoryBanners"
+        v-for="banner of categories"
         :key="banner.id"
         :banner="banner"
       />
     </div>
-    <div class="main-page__product-list">
-      <Product @addProduct="addProduct" v-for="product of products" :product="product"
-               :key="product.id"/>
-    </div>
-    <SalesBanner class="main-page__sales-banner" :banner="saleBanner"/>
-    <Comments :comments="comments"/>
+    <!--    <div class="main-page__product-list container">-->
+    <!--      <Product @addProduct="addProduct" v-for="product of products" :product="product"-->
+    <!--               :key="product.id"/>-->
+    <!--    </div>-->
+    <ProductsSlider class="main-page container" @addProduct="addProduct" :list="products"/>
+    <SalesBanner class="main-page__sales-banner container" :banner="saleBanner"/>
+    <Comments class="main-page__comments" :comments="comments"/>
   </div>
 </template>
 
@@ -28,56 +29,69 @@
 import Banner from "~/components/Banner/Banner";
 import Comments from "~/components/Comments/Comments";
 import Product from "~/components/Product/Product";
+import ProductsSlider from "~/components/ProductsSlider/ProductsSlider";
 import SalesBanner from "~/components/SalesBanner/SalesBanner";
 import Slider from '~/components/Slider/Slider'
 import TextWithImage from "~/components/UI/TextWithImage";
 
-import {mapActions} from "vuex"
+import {features} from "~/data/features";
+import {mapActions, mapGetters} from "vuex"
 
 export default {
   name: 'IndexPage',
-  components: {Comments, Product, SalesBanner, Banner, TextWithImage, Slider},
+  components: {ProductsSlider, Comments, Product, SalesBanner, Banner, TextWithImage, Slider},
   layout: 'default',
   data: () => {
     return {
-      slides: [],
-      features: [{
-        id: 1, title: "Актуальні ціни", image: `${require(`assets/icons/dollar-symbol.png`)}`
-      }, {
-        id: 2, title: "Доставка квітів", image: `${require(`assets/icons/cargo-truck.png`)}`
-      }, {
-        id: 3,
-        title: "Завжди на звя'зку +38096 901 86 77",
-        image: `${require(`assets/icons/phone-call.png`)}`
-      }, {
-        id: 4, title: "Завжди свіжі квіти!", image: `${require(`assets/icons/bouquet.png`)}`
-      },],
-      categoryBanners: [],
-      products: [],
-      saleBanner: {},
-      comments: [],
+      // slides: [],
+      // features: features,
+      // categoryBanners: [],
+      // saleBanner: {},
+      // comments: [],
     }
   },
-  methods: {
-    ...mapActions({addProduct: "cart/addProduct"})
+  computed: {
+    ...mapGetters({
+      products: "products/products",
+      categories: "productCategories/categories",
+      slides: "slider/slides",
+      features: "features/features",
+      saleBanner: "saleBanner/saleBanner",
+      comments: "comments/comments"
+    })
   },
-  async created() {
+  methods: {
+    ...mapActions({
+      addProduct: "cart/addProduct",
+      getProducts: "products/getProducts",
+      getCategories: "productCategories/getCategories",
+      getSlides: "slider/getSlides",
+      getFeatures: "features/getFeatures",
+      getSaleBanner: "saleBanner/getSaleBanner",
+      getComments: "comments/getComments"
+    })
+  },
+  created() {
     try {
-      const {data: slides} = await this.$axios.$get('slides?populate=image')
+      // const {data: slides} = await this.$axios.$get('slides?populate=image')
+      // const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
+      // const {data: comments} = await this.$axios.$get('comments?populate=icon')
       // const {data: features} = await this.$axios.$get('features?populate=image')
-      const {data: categoryBanners} = await this.$axios.$get('category-banners?populate=image')
-      const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
-      const {data: products} = await this.$axios.$get('flower-pots?populate=image')
-      const {data: comments} = await this.$axios.$get('comments?populate=icon')
 
 
-      this.slides = slides
+      this.getSaleBanner()
+      this.getFeatures()
+      this.getProducts()
+      this.getCategories()
+      this.getSlides()
+      this.getComments()
+
+
       // this.features = features
-      this.categoryBanners = categoryBanners
-      this.saleBanner = saleBanner
-      this.products = products
-      this.comments = comments
-  console.log(comments)
+      // this.slides = slides
+      // this.saleBanner = saleBanner
+      // this.comments = comments
+
     } catch (e) {
       console.error("index page error,", e)
     }
@@ -87,15 +101,25 @@ export default {
 }
 </script>
 <style lang='scss'>
+@import "assets/variables";
+
 .main-page {
   height: 100%;
   box-sizing: border-box;
+  max-width: 1920px;
+  min-width: 320px;
+  margin: 0 auto;
+  // global
+  .container {
+    margin: 45px 45px 0 45px;
+  }
 
+  // /global
   // slider
   &__slider {
     height: 100%;
     min-height: 600px;
-    margin: 15px;
+    margin: 30px 15px;
   }
 
   //  /slider
@@ -103,34 +127,63 @@ export default {
   &__features {
     display: flex;
     flex-wrap: wrap;
-    margin: 15px;
+
   }
 
   //  /features
   //  banners
   &__category-banners {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
+
   }
 
   //  /banners
-  //  sales-banner
-  &__sales-banner {
-    margin: 15px;
-  }
-
-  //  /sales-banner
   //  products-list
   &__product-list {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 
   }
 
   //  /products-list
+  //  sales-banner
+  &__sales-banner {
+
+  }
+
+  //  /sales-banner
+  // comments
+  &__comments {
+    margin-top: 45px;
+  }
+
+  // /comments
+  //   media
+  @media screen and (max-width: $mediaXlWidth) {
+    .container {
+      margin: 45px 45px 0 45px;
+    }
+  }
+
+  @media screen and (max-width: $mediaLWidth) {
+    .container {
+      margin: 35px 35px 0 35px;
+    }
+  }
+  @media screen and (max-width: $mediaMWidth) {
+    .container {
+      margin: 25px 25px 0 25px;
+    }
+  }
+  @media screen and (max-width: $mediaSWidth) {
+    .container {
+      margin: 5px 5px 0 5px;
+    }
+  }
 }
 </style>
 <!--populate-->

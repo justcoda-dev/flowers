@@ -24,7 +24,7 @@ export default {
 .image-with-text {
   display: flex;
   align-items: center;
-  flex: 1 1 280px;
+  flex: 1 1 250px;
   border: 1px solid $borderColor;
   margin: 10px;
   padding: 20px;
@@ -38,6 +38,10 @@ export default {
 
   &__text {
     padding-left: 15px;
+  }
+  @media screen and (max-width: $mediaSWidth) {
+    margin: 5px;
+    padding: 10px;
   }
 }
 </style>

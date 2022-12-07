@@ -1,10 +1,12 @@
 <template>
   <div class="banner">
-    <figure class="banner__image-wrapper">
+    <figure class="banner__image-wrapper" :class="{isActive}">
       <img class="banner__image"
-           :src="`https://kvitnychok.herokuapp.com${banner.attributes?.image?.data?.attributes?.url}`" alt="">
+           :src="banner.attributes?.image?.data?.attributes?.url" alt="">
       <Title class="banner__title" type="h3" :text="banner.attributes?.title"/>
-      <NuxtLink class="banner__link" :to="banner.attributes?.to">Переглянути</NuxtLink>
+      <NuxtLink @click.native="onClick" class="banner__link" :to="banner.attributes?.to">
+        Переглянути
+      </NuxtLink>
     </figure>
   </div>
 </template>
@@ -20,12 +22,31 @@ export default {
       type: Object,
       require: true
     }
+  },
+  data: () => {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    onClick() {
+      this.$emit("click", this.banner.attributes.category)
+    }
+  },
+  watch: {
+    "$route"(to) {
+      this.isActive = to.path === this.banner.attributes?.to
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "assets/variables";
+
+.isActive {
+  border: 2px solid $sliderText;
+}
 
 .banner {
   font-family: 'Fira Sans', sans-serif;

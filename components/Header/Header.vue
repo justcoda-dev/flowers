@@ -6,7 +6,7 @@
     </div>
     <div class='header__nav'>
       <ButtonHome v-if="!mobile" @click="onHomeButtonClick"/>
-      <MobileNavMenu v-if="mobile" class="nav-list-mobile" :showToggle="onMobileButtonToggle"
+      <MobileNavMenu v-if="mobile" class="nav-list-mobile"
                      :list="navList"/>
       <nav v-else class='nav-list-desktop'>
         <NuxtLink
@@ -18,7 +18,7 @@
         </NuxtLink>
 
       </nav>
-      <CartHeader :cartCount="cartCount" :productsList="cart"/>
+      <CartHeader :cartFullPrice="cartFullPrice" class="header__cart" :cartCount="cartCount" :productsList="cart"/>
     </div>
   </header>
 </template>
@@ -29,7 +29,7 @@ import MobileNavMenu from "~/components/MobileNavMenu/MobileNavMenu";
 import ButtonCart from "~/components/UI/ButtonCart";
 import ButtonHome from "~/components/UI/ButtonHome";
 import ButtonIcon from '~/components/UI/ButtonIcon'
-import {debounce} from "~/functions/debounce";
+import {debounce} from "~/functionsProject/debounce";
 
 export default {
   name: 'Header',
@@ -46,6 +46,10 @@ export default {
     cartCount: {
       type: Number,
       require: false
+    },
+    cartFullPrice: {
+      type: [String, Number],
+      require: true
     }
   },
   data: () => {
@@ -124,11 +128,10 @@ export default {
     display: flex;
     justify-content: space-between;
     background: $headerNavBackground;
-    min-height: 50px;
+    min-height: 70px;
   }
 
   &__cart {
-    justify-self: flex-end;
   }
 }
 
@@ -143,15 +146,31 @@ export default {
 
   &__item {
     display: block;
+    position: relative;
     text-decoration: none;
     color: $headerFontColor;
     text-transform: uppercase;
     transition: .3s;
+    font-size: 0.9rem;
     font-weight: 500;
-    padding: 30px 10px 25px 10px;
+    padding: 30px 15px 25px 15px;
 
-    &:hover {
-      color: #333333;
+    &:after {
+      display: block;
+      position: absolute;
+      top: 43%;
+      left: 0;
+      content: "";
+      background: $headerFontColor;
+      height: 14px;
+      width: 1px;
+      opacity: .5;
+    }
+  }
+
+  & > &__item:first-child {
+    &:after {
+      display: none;
     }
   }
 }

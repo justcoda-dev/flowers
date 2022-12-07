@@ -2,10 +2,12 @@
   <div class="product" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <div class="product__image">
       <img
-        :src="`https://kvitnychok.herokuapp.com${product.attributes?.image?.data?.attributes?.url}`" alt="">
+        :src="product.attributes?.image?.data?.attributes?.url" alt="">
     </div>
     <div class="product__text-wrapper">
-      <p class="product__title">{{ product.attributes?.title }}</p>
+      <NuxtLink :to="`/flower-pots/product/${product.id}`" class="product__title">
+        {{ product.attributes?.title }}
+      </NuxtLink>
       <p class="product__price">{{ product.attributes?.price }} грн</p>
     </div>
     <!--    <p class="product__count">{{ product.attributes?.count }} шт</p>-->
@@ -56,7 +58,8 @@ export default {
   width: 100%;
   border: 1px solid $bodyBackground;
   border-radius: 5px;
-max-width: 200px;
+  max-width: 200px;
+
   &__image {
     position: relative;
     width: 100%;
@@ -98,6 +101,7 @@ max-width: 200px;
     margin: 10px;
     cursor: pointer;
     transition: .3s;
+    color: $sliderText;
 
     &:hover {
       color: $sliderTitle;

@@ -1,12 +1,12 @@
 <template>
   <label
-      class="mobile-button-checkbox"
-      :class="{checked}"
-      @change="onChange"
+    class="mobile-button-checkbox"
+    :class="{checked:checkedProp}"
+    @change="onChange"
   >
     <input
-        class="mobile-button-checkbox__checkbox"
-        type="checkbox"
+      class="mobile-button-checkbox__checkbox"
+      type="checkbox"
     />
     <span class="mobile-button-checkbox__line"/>
     <span class="mobile-button-checkbox__line"/>
@@ -23,7 +23,8 @@ export default {
       type: Boolean,
       require: false,
       default: false
-    }
+    },
+
   },
   data: () => {
     return {
@@ -34,7 +35,7 @@ export default {
   methods: {
     onChange() {
       this.checked = !this.checked
-      this.$emit("change", this.checked )
+      this.$emit("change", this.checked)
     }
   }
 }
