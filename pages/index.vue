@@ -34,22 +34,12 @@ import SalesBanner from "~/components/SalesBanner/SalesBanner";
 import Slider from '~/components/Slider/Slider'
 import TextWithImage from "~/components/UI/TextWithImage";
 
-import {features} from "~/data/features";
-import {mapActions, mapGetters} from "vuex"
 
+import {mapActions, mapGetters} from "vuex"
 export default {
   name: 'IndexPage',
   components: {ProductsSlider, Comments, Product, SalesBanner, Banner, TextWithImage, Slider},
   layout: 'default',
-  data: () => {
-    return {
-      // slides: [],
-      // features: features,
-      // categoryBanners: [],
-      // saleBanner: {},
-      // comments: [],
-    }
-  },
   computed: {
     ...mapGetters({
       products: "products/products",
@@ -73,31 +63,16 @@ export default {
   },
   created() {
     try {
-      // const {data: slides} = await this.$axios.$get('slides?populate=image')
-      // const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
-      // const {data: comments} = await this.$axios.$get('comments?populate=icon')
-      // const {data: features} = await this.$axios.$get('features?populate=image')
-
-
       this.getSaleBanner()
       this.getFeatures()
       this.getProducts()
       this.getCategories()
       this.getSlides()
       this.getComments()
-
-
-      // this.features = features
-      // this.slides = slides
-      // this.saleBanner = saleBanner
-      // this.comments = comments
-
     } catch (e) {
       console.error("index page error,", e)
     }
-
   }
-
 }
 </script>
 <style lang='scss'>

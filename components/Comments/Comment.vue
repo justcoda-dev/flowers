@@ -1,10 +1,10 @@
 <template>
-  <div class="comment">
+  <div class="comment" v-if="propIsCome">
     <img class="comment__image"
-         :src="comment.attributes?.icon?.data?.attributes?.url"
+         :src="`https://api.kvitnychok.store${comment.attributes?.icon?.data?.attributes?.url}`"
          alt="loading...">
     <p class="comment__comment">{{ comment.attributes?.comment }}</p>
-    <span class="comment__user">{{ fullName }}</span>
+    <span class="comment__user">{{ this.comment.attributes?.name }}</span>
   </div>
 </template>
 
@@ -18,8 +18,8 @@ export default {
     }
   },
   computed: {
-    fullName() {
-      return `${this.comment.attributes?.name} ${this.comment.attributes?.surname}`
+    propIsCome(){
+      return Object.keys(this.comment).length
     }
   }
 }

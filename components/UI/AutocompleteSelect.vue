@@ -1,5 +1,5 @@
 <template>
-  <div class='autocomplete-select'>
+  <div class='autocomplete-select' ref="auto-select">
     <div class='autocomplete-select__input-wrapper'>
       <input
         :placeholder="placeholder || 'select'"
@@ -51,7 +51,6 @@ export default {
     };
   },
 
-  computed: {},
   watch: {
     list(value) {
       this.showList = !!value
@@ -74,6 +73,14 @@ export default {
     onInput({target: {value}}) {
       this.$emit("input", value)
     }
+  },
+  mounted() {
+    window.addEventListener("click", (e) => {
+      const container = this.$refs["auto-select"]
+      if (!container.contains(e.target)) {
+        this.showList = false
+      }
+    })
   },
 };
 </script>

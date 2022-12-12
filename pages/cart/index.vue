@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex"
+import {mapActions, mapGetters} from "vuex";
 import CartFull from "~/components/Cart/CartFull";
 import Title from "~/components/UI/Title";
 
@@ -31,10 +31,21 @@ export default {
     }
   },
   methods: {
-    ...mapActions({minusProduct: "cart/minusProduct", addProduct: "cart/addProduct"}),
-    onForm(data) {
-      console.log(data)
+    ...mapActions({
+      minusProduct: "cart/minusProduct",
+      addProduct: "cart/addProduct",
+      cleanCart: "cart/cleanCart"
+    }),
+    async onForm(data) {
       this.success = true
+      this.cleanCart()
+      try {
+        const response = await this.$axios.post("http://mail.kvitnychok.store/send-email", {data})
+        console.log(response)
+      } catch (e) {
+        console.error(e)
+      }
+
     }
   },
   computed: {

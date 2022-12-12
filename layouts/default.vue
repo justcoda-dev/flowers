@@ -48,16 +48,6 @@ export default {
   computed: {
     ...mapGetters({getCart: "cart/getCart", getCartCount: "cart/getCartCount", getCartFullPrice:"cart/cartFullPrice"})
   },
-  async created() {
-    try {
-      // const {data: navList} = await this.$axios.$get('nav-items')
-      // const {data: socialList} = await this.$axios.$get('socials?populate=icon')
-      // this.navList = navList
-      // this.socialList = socialList
-    } catch (e) {
-      console.error("default layout error:", e)
-    }
-  }
 }
 </script>
 

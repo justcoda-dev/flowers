@@ -1,7 +1,8 @@
 const MUTATION_TYPES = {
   ADD_PRODUCT: "ADD_PRODUCT",
   MINUS_PRODUCT: "MINUS_PRODUCT",
-  DELETE_PRODUCT: "DELETE_PRODUCT"
+  DELETE_PRODUCT: "DELETE_PRODUCT",
+  CLEAN_CART: "CLEAN_CART"
 }
 export const actions = {
   addProduct({commit}, product) {
@@ -12,6 +13,9 @@ export const actions = {
   },
   deleteProduct({commit}, product) {
     commit(MUTATION_TYPES.DELETE_PRODUCT, product)
+  },
+  cleanCart({commit}) {
+    commit(MUTATION_TYPES.CLEAN_CART)
   }
 }
 
@@ -41,6 +45,9 @@ export const mutations = {
     if (cartHaveProductIndex >= 0) {
       cart.splice(cartHaveProductIndex, 1)
     }
+  },
+  [MUTATION_TYPES.CLEAN_CART](state) {
+    state.cart = [];
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="products-slider" ref="slider-wrapper">
+  <div v-if="list.length" class="products-slider" ref="slider-wrapper">
     <ArrowButton class="products-slider__left-btn" @click="onArrowButtonClickPreviousHandler"
                  type="left"/>
     <ArrowButton class="products-slider__right-btn" @click="onArrowButtonClickNextHandler"
@@ -7,12 +7,12 @@
     <div class="products-slider__list"
          :style="{ transform: `translate3d(${transformPx}px, 0px, 0px) `, width:`${listWidth}px`}">
       <Product
-        @addProduct="addProductToCart"
-        ref="product"
-        class="products-slider__item"
-        v-for="item of list"
-        :product="item"
-        :key="item.id"
+          @addProduct="addProductToCart"
+          ref="product"
+          class="products-slider__item"
+          v-for="item of list"
+          :product="item"
+          :key="item.id"
       />
     </div>
   </div>
@@ -66,19 +66,15 @@ export default {
     addProductToCart(product) {
       this.$emit("addProduct", product)
     }
-  }
-  ,
+  },
   mounted() {
-    this.elementWidth = this.$refs.product[0].$el.clientWidth
-    this.productsLength = this.$refs.product.length
+    this.elementWidth = this.$refs.product?.[0]?.$el?.clientWidth
+    this.productsLength = this.$refs.product?.length
     this.maxLength = this.productsLength * this.elementWidth
     this.listWidth = (this.productsLength * 2) * this.elementWidth
-    this.sliderWrapperWidth = this.$refs['slider-wrapper'].clientWidth
+    this.sliderWrapperWidth = this.$refs['slider-wrapper']?.clientWidth
     this.elementsInLine = Math.round((this.sliderWrapperWidth / this.elementWidth)) - 1
-
-    console.log(this.elementsInLine)
-    console.log(this.elementsInLine)
-  }
+  },
 }
 </script>
 

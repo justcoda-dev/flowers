@@ -1,8 +1,9 @@
 <template>
-  <div class="cart-header">
+  <div class="cart-header" ref="cart-header">
     <ButtonCart :cartCount="cartCount" @click="onShowListToggle"/>
-    <div v-if="showList" class="cart-header__wrapper">
-      <CartProductList class="cart-header__list" v-if="productsList.length" :list="productsList"/>
+    <div v-show="showList" class="cart-header__wrapper">
+      <CartProductList class="cart-header__list" v-if="productsList.length"
+                       :list="productsList"/>
       <p v-else>Корзина пуста</p>
       <div class="cart-header__buttons">
         <!--        <ButtonConfirm @click="onConfirm">Підтвердити</ButtonConfirm>-->
@@ -61,7 +62,16 @@ export default {
       this.showList = false
       this.$router.push("/cart")
     }
-  }
+  },
+  mounted() {
+    window.addEventListener("click", (e) => {
+      const container = this.$refs["cart-header"]
+      console.log(container.contains(e.target))
+      if (!container.contains(e.target)) {
+        this.showList = false
+      }
+    })
+  },
 }
 </script>
 

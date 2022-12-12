@@ -4,7 +4,8 @@
       <li class="cart-full__item" v-for="product of list">
         <div class="cart-full__info">
           <img class="cart-full__item-image"
-               :src="product.attributes?.image?.data?.attributes?.url" alt="">
+               :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`"
+               alt="">
           <div class="cart-full__item-description">
             <p class="cart-full__item-title">{{ product.attributes?.title }}</p>
             <p class="cart-full__item-count">Усього {{ product.attributes?.count }} шт x
@@ -18,8 +19,8 @@
         </div>
       </li>
     </ul>
-    <div v-else>Корзина пуста. Зробіть ваше замовлення</div>
-    <Form @click="onSubmitForm"/>
+    <h2 v-else>Корзина пуста. Зробіть ваше замовлення</h2>
+    <Form class="cart-full__form" @click="onSubmitForm"/>
     <p class="cart-full__item-total-price">Загальна вартість {{ fullPrice }} грн</p>
   </div>
 </template>
@@ -57,7 +58,7 @@ export default {
       this.$emit("deleteClick")
     },
     onSubmitForm(props) {
-      this.$emit("onForm", {user: props, cart: this.list})
+      this.$emit("onForm", {user: props, cart: this.list, totalPrice: this.fullPrice})
     }
   },
   computed: {}
@@ -117,7 +118,9 @@ export default {
   &__item-title {
 
   }
-
+&__form {
+  padding: 0 20px;
+}
   &__item-total-price {
     padding: 10px 0;
     font-weight: 600;

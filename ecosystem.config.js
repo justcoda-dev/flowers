@@ -1,9 +1,20 @@
+// args:develop
 module.exports = {
-  apps: [{
-    name: "NuxtAppName",
-    exec_mode: 'cluster',
-    instances: 'max',
-    script: './node_modules/nuxt/bin/nuxt.js',
-    args: 'start'
-  }]
-}
+  apps: [
+    {
+      name: 'flowers',
+      script: 'npm',
+      args: 'start',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
+  ],
+};
+
+
+
+
+
+
+

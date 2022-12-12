@@ -2,7 +2,7 @@
   <ul class="cart-list">
     <li class="cart-list__item" v-for="product of list">
       <img class="cart-list__item-image"
-           :src="product.attributes?.image?.data?.attributes?.url" alt="">
+           :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`" alt="">
       <div class="cart-list__item-description">
         <p class="cart-list__item-title">{{ product.attributes?.title }}</p>
         <p class="cart-list__item-count"> {{ product.attributes?.count }} шт x

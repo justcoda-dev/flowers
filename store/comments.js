@@ -1,14 +1,13 @@
-import {comments} from "~/data/comments";
-
 const MUTATION_TYPES = {
   GET_COMMENTS: "GET_COMMENTS",
 
 }
 
 export const actions = {
-  getComments({commit}) {
-    // const {data: products} = await this.$axios.$get('flower-pots?populate=image')
-    commit(MUTATION_TYPES.GET_COMMENTS, comments.data)
+  async getComments({commit}) {
+    const {data: comments} = await this.$axios.$get('comments?populate=icon')
+    console.log(comments)
+    commit(MUTATION_TYPES.GET_COMMENTS, comments)
   }
 }
 

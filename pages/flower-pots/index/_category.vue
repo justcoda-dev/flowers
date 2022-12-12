@@ -1,7 +1,9 @@
 <template>
   <div class="products-page__product-list">
-    <Product @addProduct="addProduct" v-for="product of products" :product="product"
+    <Product v-if="products.length" @addProduct="addProduct" v-for="product of products"
+             :product="product"
              :key="product.id"/>
+    <div v-else>Нажаль продукції не існує</div>
   </div>
 
 </template>
@@ -23,6 +25,7 @@ export default {
   created() {
     if (this.$route.params.category) {
       this.getProductsByCategory(this.$route.params.category)
+      console.log(this.products)
     } else {
       this.getProducts()
     }

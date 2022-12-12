@@ -1,8 +1,8 @@
 <template>
   <div class="sales-banner">
-    <img class="sales-banner__image"
-         :src="banner.attributes?.image?.data?.attributes?.url"
-         alt="">
+    <img v-if="propsIsCome" class="sales-banner__image"
+         :src="`https://api.kvitnychok.store${banner.attributes?.image?.data?.attributes?.url}`"
+         alt="#">
     <div class="sales-banner__text-block">
       <Title class="sales-banner__title-name">Акція</Title>
       <Title class="sales-banner__title-text" type="h3" :text="banner.attributes?.title"/>
@@ -28,9 +28,9 @@ export default {
       require: true
     },
   },
-  data: () => {
-    return {
-      timer: 0
+  computed:{
+    propsIsCome(){
+      return Object.keys(this.banner).length
     }
   }
 }
@@ -63,6 +63,9 @@ export default {
     height: 100%;
     right: 0;
     position: absolute;
+    @media screen and (max-width: $mediaMWidth){
+      width: 100%;
+    }
   }
 
   &__title-name {
@@ -71,6 +74,7 @@ export default {
   }
 
   &__title-text {
+    text-align: center;
     color: $sliderTitle;
     font-weight: 600;
   }

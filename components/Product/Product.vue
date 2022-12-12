@@ -2,7 +2,8 @@
   <div class="product" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <div class="product__image">
       <img
-        :src="product.attributes?.image?.data?.attributes?.url" alt="">
+          :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`"
+          alt="#">
     </div>
     <div class="product__text-wrapper">
       <NuxtLink :to="`/flower-pots/product/${product.id}`" class="product__title">

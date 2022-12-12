@@ -1,7 +1,7 @@
 <template>
   <li  class='slide'
       :style='{
-    background: `url(${slide.attributes?.image?.data?.attributes?.url})`,
+    background: `url(https://api.kvitnychok.store${slide.attributes?.image?.data?.attributes?.url})`,
     }
 '>
     <div class='slide__text-wrapper'>

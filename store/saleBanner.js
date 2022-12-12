@@ -1,14 +1,11 @@
-import {saleBanner} from "~/data/saleBanner";
-
 const MUTATION_TYPES = {
   GET_SALE_BANNER: "GET_SALE_BANNER",
-
 }
 
 export const actions = {
-  getSaleBanner({commit}) {
-    // const {data: products} = await this.$axios.$get('flower-pots?populate=image')
-    commit(MUTATION_TYPES.GET_SALE_BANNER, saleBanner.data)
+  async getSaleBanner({commit}) {
+    const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
+    commit(MUTATION_TYPES.GET_SALE_BANNER, saleBanner)
   }
 }
 
@@ -21,7 +18,7 @@ export const mutations = {
 
 export const state = () => ({
   loading: false,
-  saleBanner: [],
+  saleBanner: {},
 })
 
 export const getters = {
