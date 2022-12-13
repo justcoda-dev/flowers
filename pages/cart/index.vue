@@ -40,7 +40,7 @@ export default {
       this.success = true
       this.cleanCart()
       try {
-        const response = await this.$axios.post("http://mail.kvitnychok.store/send-email", {data})
+        const response = await this.$axios.post("https://mail.kvitnychok.store/send-email", {data})
         console.log(response)
       } catch (e) {
         console.error(e)

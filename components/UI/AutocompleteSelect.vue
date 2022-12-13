@@ -11,7 +11,7 @@
       >
       <div class='autocomplete-select__buttons-wrapper'>
         <button v-if="inputValue" @click="cancelValue" class='button autocomplete-select__cancel'/>
-        <button @click.prevent="openList" class='button autocomplete-select__open'/>
+        <button v-if="inputValue" @click.prevent="openList" class='button autocomplete-select__open'/>
       </div>
       <ul
         v-if="list && showList"
@@ -75,12 +75,14 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener("click", (e) => {
-      const container = this.$refs["auto-select"]
-      if (!container.contains(e.target)) {
-        this.showList = false
-      }
-    })
+    const container = this.$refs["auto-select"]
+    if (container) {
+      window.addEventListener("click", (e) => {
+        if (!container.contains(e.target)) {
+          this.showList = false
+        }
+      })
+    }
   },
 };
 </script>

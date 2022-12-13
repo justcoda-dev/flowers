@@ -21,7 +21,7 @@ export default {
     return {
       navList: [
         {id: 1, to: "/", title: "Головна"},
-        {id: 2, to: "/flower-pots", title: "Вазони"},
+        {id: 2, to: "/flower-pots", title: "Кімнатні рослини"},
         {id: 3, to: "/cart", title: "Корзина"},
         {id: 4, to: "/contacts", title: "Контакти"}],
       socialList: [

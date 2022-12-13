@@ -81,6 +81,9 @@ export default {
   &__item {
     display: flex;
     padding: 10px;
+  background: #ecf7f9;
+    margin: 5px 0;
+    border-radius: 5px;
   }
 
   &__info {
@@ -118,9 +121,11 @@ export default {
   &__item-title {
 
   }
-&__form {
-  padding: 0 20px;
-}
+
+  &__form {
+    padding: 0 20px;
+  }
+
   &__item-total-price {
     padding: 10px 0;
     font-weight: 600;

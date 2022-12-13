@@ -66,7 +66,6 @@ export default {
     },
     windowsWidthWatching() {
       const debouncedFn = debounce(({target: {innerWidth}}) => {
-        console.log(innerWidth)
         if (innerWidth < this.mobileMode) {
           this.mobile = true
         } else {

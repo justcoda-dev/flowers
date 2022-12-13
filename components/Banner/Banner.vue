@@ -1,10 +1,10 @@
 <template>
-  <div class="banner">
+  <div class="banner" @click="onClick">
     <figure class="banner__image-wrapper" :class="{isActive}">
       <img class="banner__image"
            :src="banner.attributes?.image?.data?.attributes?.url" alt="">
       <Title class="banner__title" type="h3" :text="banner.attributes?.title"/>
-      <NuxtLink @click.native="onClick" class="banner__link" :to="banner.attributes?.to">
+      <NuxtLink class="banner__link" :to="banner.attributes?.to">
         Переглянути
       </NuxtLink>
     </figure>
@@ -25,11 +25,13 @@ export default {
   },
   data: () => {
     return {
-      isActive: false
+      isActive: false,
+      mobile: false
     }
   },
   methods: {
     onClick() {
+      this.$router.push(this.banner.attributes?.to)
       this.$emit("click", this.banner.attributes.category)
     }
   },
@@ -37,6 +39,8 @@ export default {
     "$route"(to) {
       this.isActive = to.path === this.banner.attributes?.to
     }
+  }, mounted() {
+    this.isActive = this.$route.path === this.banner.attributes?.to
   }
 }
 </script>
@@ -52,7 +56,8 @@ export default {
   font-family: 'Fira Sans', sans-serif;
   margin: 15px;
   display: flex;
-  flex: 1 0 280px;
+  flex: 0 1 280px;
+  cursor: pointer;
 
   &__image {
     width: 100%;

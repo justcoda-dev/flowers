@@ -46,5 +46,20 @@ export const categories = {
           }
         }
       }
+    }, {
+      "id": 4,
+      "attributes": {
+        "title": "Всі",
+        "to": "/flower-pots/",
+        "category": "",
+        "image": {
+          "data": {
+            "id": 1,
+            "attributes": {
+              "url": `${require(`assets/categories/Category-01.jpg`)}`,
+            }
+          }
+        }
+      }
     }]
 }

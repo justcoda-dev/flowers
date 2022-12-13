@@ -1,9 +1,9 @@
 <template>
-  <div class="product" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
-    <div class="product__image">
+  <div v-if="productIsCome" class="product" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+    <div class="product__image" @click="onImageClick">
       <img
-          :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`"
-          alt="#">
+        :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`"
+        alt="#">
     </div>
     <div class="product__text-wrapper">
       <NuxtLink :to="`/flower-pots/product/${product.id}`" class="product__title">
@@ -12,16 +12,21 @@
       <p class="product__price">{{ product.attributes?.price }} грн</p>
     </div>
     <!--    <p class="product__count">{{ product.attributes?.count }} шт</p>-->
-    <ButtonAdd @click="onAddProduct" v-if="hover" class="product__button">Додати в кошик</ButtonAdd>
+    <ButtonAdd @click="onAddProduct" v-if="hover || mobile" :class="{'product__button':!mobile}">
+      Додати в корзину
+    </ButtonAdd>
+    <AddedStatus v-if="added" :product="product"/>
   </div>
 </template>
 
 <script>
+import AddedStatus from "~/components/UI/AddedStatus";
 import ButtonAdd from "~/components/UI/ButtonAdd";
+import {debounce} from "~/functionsProject/debounce";
 
 export default {
   name: "Product",
-  components: {ButtonAdd},
+  components: {AddedStatus, ButtonAdd},
   props: {
     product: {
       type: Object,
@@ -30,7 +35,15 @@ export default {
   },
   data: () => {
     return {
-      hover: false
+      hover: false,
+      mobile: false,
+      mobileMode: 900,
+      added: false
+    }
+  },
+  computed:{
+    productIsCome(){
+      return Object.keys(this.product).length
     }
   },
   methods: {
@@ -42,7 +55,31 @@ export default {
     },
     onAddProduct() {
       this.$emit("addProduct", this.product)
+      this.added = true
+      setTimeout(() => {
+        this.added = false
+      }, 500)
+    },
+    onImageClick() {
+      console.log("click")
+      this.$router.push(`/flower-pots/product/${this.product.id}`)
+    },
+    windowsWidthWatching() {
+      const debouncedFn = debounce(({target: {innerWidth}}) => {
+        if (innerWidth < this.mobileMode) {
+          this.mobile = true
+        } else {
+          this.mobile = false
+        }
+      }, this.debounceTime)
+      if (window.innerWidth < this.mobileMode) {
+        this.mobile = true
+      }
+      window.addEventListener("resize", debouncedFn)
     }
+  },
+  mounted() {
+    this.windowsWidthWatching()
   }
 }
 </script>
@@ -93,6 +130,8 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-height: 100px;
+    min-height: 100px;
   }
 
   &__title {
@@ -136,7 +175,7 @@ export default {
 
   &__button {
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
   }
 }
 </style>

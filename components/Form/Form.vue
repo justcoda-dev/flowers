@@ -1,7 +1,7 @@
 <template>
   <form class="form" @submit.prevent="">
     <InputText :placeholder="'Ім\'я та Прізвище'" v-model="userData.name"/>
-    <InputPhone :placeholder="'Телефон'" v-model="userData.phoneNumber"/>
+    <InputPhone :placeholder="'Телефон у форматі 380'" v-model="userData.phoneNumber"/>
     <AutocompleteSelect
       @selectItem="onSelectCity"
       v-model="userData.city"
@@ -15,7 +15,7 @@
       :placeholder="'Оберіть відділення'"
       @input="onInputDepartment"
     />
-    <ButtonConfirm :disabled="disabled" @click="onSubmit(userData)" >Підтвердити</ButtonConfirm>
+    <ButtonConfirm :disabled="disabled" @click="onSubmit(userData)">Підтвердити</ButtonConfirm>
     <!--    <AutocompleteSelect :placeholder="'Відділення'"/>-->
   </form>
 </template>
@@ -54,12 +54,16 @@ export default {
         } else {
           this.disabled = true
         }
-        console.log("changed", true.disabled)
       },
       deep: true
     }
   },
   methods: {
+    onPhoneInput(data) {
+      this.userData.phoneNumber = data.value
+      this.invalidPhone = data.invalid
+      console.log(data.invalid)
+    },
     onCityInput(value) {
       if (this.timeoutId) clearTimeout(this.timeoutId)
       this.timeoutId = setTimeout(async () => {

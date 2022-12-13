@@ -40,14 +40,17 @@ export default {
       getProductsByCategory: "products/getProductsByCategory"
     }),
     onBannerClick(category) {
-      this.getProductsByCategory(category)
+      if (category) {
+        this.getProductsByCategory(category)
+      } else {
+        this.getProducts()
+      }
     }
   },
   created() {
     this.getCategories()
     this.getProducts()
     this.route = this.$route.path
-    console.log(this.route)
   }
 }
 </script>

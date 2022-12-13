@@ -64,13 +64,14 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener("click", (e) => {
-      const container = this.$refs["cart-header"]
-      console.log(container.contains(e.target))
-      if (!container.contains(e.target)) {
-        this.showList = false
-      }
-    })
+    const container = this.$refs["cart-header"]
+    if (container) {
+      window.addEventListener("click", (e) => {
+        if (!container.contains(e.target)) {
+          this.showList = false
+        }
+      })
+    }
   },
 }
 </script>

@@ -36,6 +36,7 @@ import TextWithImage from "~/components/UI/TextWithImage";
 
 
 import {mapActions, mapGetters} from "vuex"
+
 export default {
   name: 'IndexPage',
   components: {ProductsSlider, Comments, Product, SalesBanner, Banner, TextWithImage, Slider},
@@ -109,9 +110,10 @@ export default {
   //  banners
   &__category-banners {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
+    justify-content: center;
+    @media screen and (max-width: $mediaLWidth) {
+      flex-wrap: wrap;
+    }
   }
 
   //  /banners

@@ -12,6 +12,7 @@ export const actions = {
   async getProductsByCategory({commit}, category) {
     try {
       const {data: productsByCategory} = await this.$axios.$get(`${category}?populate=deep`)
+      console.log(productsByCategory)
       commit(MUTATION_TYPES.GET_PRODUCTS_BY_CATEGORY, productsByCategory.attributes?.products?.data)
     } catch (e) {
       commit(MUTATION_TYPES.GET_PRODUCTS_BY_CATEGORY, [])
