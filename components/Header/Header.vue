@@ -1,13 +1,20 @@
 <template>
   <header class='header'>
     <div class='header__logo'>
-      <div class='header__logo-text'>Знижка на 10 замовлення 15%</div>
-      <div class='header__logo-image'><h2>КВІТНИЧОК</h2></div>
+      <div class='header__logo-image'>
+        <NuxtLink to="/">КВІТНИЧОК</NuxtLink>
+      </div>
     </div>
     <div class='header__nav'>
-      <ButtonHome v-if="!mobile" @click="onHomeButtonClick"/>
-      <MobileNavMenu v-if="mobile" class="nav-list-mobile"
-                     :list="navList"/>
+      <ButtonHome
+        v-if="!mobile"
+        @click="onHomeButtonClick"
+      />
+      <MobileNavMenu
+        class="nav-list-mobile"
+        v-if="mobile"
+        :list="navList"
+      />
       <nav v-else class='nav-list-desktop'>
         <NuxtLink
           class='nav-list-desktop__item'
@@ -16,9 +23,12 @@
           :to='navItem.to'>
           {{ navItem.title }}
         </NuxtLink>
-
       </nav>
-      <CartHeader :cartFullPrice="cartFullPrice" class="header__cart" :cartCount="cartCount" :productsList="cart"/>
+      <CartHeader
+        class="header__cart" :cartCount="cartCount"
+        :cartFullPrice="cartFullPrice"
+        :productsList="cart"
+      />
     </div>
   </header>
 </template>
@@ -97,7 +107,7 @@ export default {
 .header {
   display: flex;
   flex-direction: column;
-
+  position: relative;
   // logo block
   &__logo {
     display: flex;
@@ -128,6 +138,15 @@ export default {
     justify-content: space-between;
     background: $headerNavBackground;
     min-height: 70px;
+    @media screen and (max-width: $mediaMWidth) {
+      position: fixed;
+      z-index: 100;
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 0;
+
+    }
   }
 
   &__cart {

@@ -1,10 +1,17 @@
 <template>
   <div class='layout'>
-    <Header :nav-list='navList' :cartFullPrice="getCartFullPrice" :cart="getCart" :cartCount="getCartCount"/>
+    <Header :navList="navList"
+            :cartFullPrice="getCartFullPrice"
+            :cart="getCart"
+            :cartCount="getCartCount"
+    />
     <div class='content'>
       <Nuxt/>
     </div>
-    <Footer :socialList="socialList"/>
+    <Footer
+      :navList="navList"
+      :socialList="socialList"
+    />
   </div>
 </template>
 
@@ -28,13 +35,13 @@ export default {
         {
           id: 1,
           name: "Facebook",
-          link: "facebook.com",
+          link: "https://www.facebook.com/profile.php?id=100063916003238",
           icon: `${require(`assets/icons/icons8-facebook.svg`)}`
         },
         {
           id: 2,
           name: "Instagram",
-          link: "instagram.com",
+          link: "https://www.instagram.com/orch_flower/",
           icon: `${require(`assets/icons/icons8-instagram.svg`)}`
         },
         {
@@ -46,7 +53,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({getCart: "cart/getCart", getCartCount: "cart/getCartCount", getCartFullPrice:"cart/cartFullPrice"})
+    ...mapGetters({
+      getCart: "cart/getCart",
+      getCartCount: "cart/getCartCount",
+      getCartFullPrice: "cart/cartFullPrice"
+    })
   },
 }
 </script>
@@ -58,11 +69,12 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  height: 100%;
   background: $mainBackground;
   margin: 25px;
-  position: relative;
-  @media screen and (max-width: 900px) {
-    margin: 15px;
+  //position: relative;
+  @media screen and (max-width: $mediaMWidth) {
+    margin: 10px;
   }
 
   .content {

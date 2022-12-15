@@ -1,55 +1,73 @@
 <template>
-  <div class="product-details">
-    <div class="product" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div v-if="propsIsCome" class="product-details">
+    <div class="product">
       <div class="product__image">
         <img
-          :src="product.attributes?.image?.data?.attributes?.url" alt="">
+          :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`"
+          alt="#">
       </div>
       <div class="product__text-wrapper">
-        <p class="product__title">{{ product.attributes?.title }}</p>
+        <p class="product__title">
+          {{ product.attributes?.title }}
+        </p>
       </div>
     </div>
-    <div class="product__text-block">
-      <p class="product__price">{{ product.attributes?.price }} грн</p>
-      <ButtonAdd @click="onAddProduct" v-if="hover" class="product__button">Додати в кошик
+    <div class="text-block">
+      <p class="text-block__price">
+        Ціна {{ product.attributes?.price }} грн
+      </p>
+      <ButtonAdd
+        class="text-block__button"
+        @click="onAddProduct"
+      >
+        Додати в кошик
       </ButtonAdd>
+      <div class="text-block__description">
+        <Title type="h5" :style="{color:'black'}">Опис</Title>
+        {{ product.attributes?.description }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ButtonAdd from "~/components/UI/ButtonAdd";
+import Title from "~/components/UI/Title";
 
 export default {
   name: "ProductDetails",
-  components: {ButtonAdd},
+  components: {Title, ButtonAdd},
   props: {
     product: {
       type: Object,
       require: true
     }
   },
-  data: () => {
-    return {
-      hover: false
+  computed: {
+    propsIsCome() {
+      return Object.keys(this.product).length
     }
   },
   methods: {
-    onMouseOver() {
-      this.hover = true
-    },
-    onMouseLeave() {
-      this.hover = false
-    },
     onAddProduct() {
-      this.$emit("addProduct", this.product)
-    }
+      this.$emit("addToCart", this.product)
+    },
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "assets/variables";
+
+.product-details {
+  display: flex;
+  padding: 40px;
+  @media screen and (max-width: $mediaMWidth) {
+    padding: 20px 10px;
+    margin: auto;
+  }
+}
 
 .product {
   position: relative;
@@ -58,15 +76,18 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  border: 1px solid $bodyBackground;
-  border-radius: 5px;
-  max-width: 30%;
+  max-width: 50%;
+  min-width: 280px;
+
+  @media screen and (max-width: $mediaMWidth) {
+    margin: auto;
+  }
 
   &__image {
     position: relative;
     width: 100%;
     height: 100%;
-    cursor: pointer;
+    max-height: 500px;
 
     img {
       object-fit: cover;
@@ -75,17 +96,6 @@ export default {
       width: 100%;
       min-height: 140px;
       min-width: 120px;
-    }
-
-    &:hover {
-      &:before {
-        position: absolute;
-        content: "";
-        background: white;
-        width: 100%;
-        height: 100%;
-        opacity: 50%;
-      }
     }
   }
 
@@ -97,16 +107,10 @@ export default {
   }
 
   &__title {
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 1.4rem;
+    font-weight: 500;
     text-align: center;
     margin: 10px;
-    cursor: pointer;
-    transition: .3s;
-
-    &:hover {
-      color: $sliderTitle;
-    }
   }
 
   &__price {
@@ -117,26 +121,27 @@ export default {
   &__count {
   }
 
-  //&__hover-menu {
-  //  position: absolute;
-  //  height: 100%;
-  //  width: 100%;
-  //  display: flex;
-  //  flex-direction: column;
-  //  align-items: center;
-  //  justify-content: flex-end;
-  //    &:before {
-  //      content: "";
-  //      background: white;
-  //      width: 100%;
-  //      height: 100%;
-  //      opacity: 50%;
-  //    }
-  //}
-
   &__button {
     position: absolute;
     bottom: 0;
   }
 }
+
+.text-block {
+  margin-left: 40px;
+  max-width: 50%;
+
+  &__price {
+    font-size: 1.4rem;
+  }
+
+  &__button {
+    margin: 20px 0;
+  }
+
+  &__description {
+
+  }
+}
+
 </style>

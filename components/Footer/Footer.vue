@@ -3,7 +3,7 @@
     <div class="contacts wrapper">
       <Title class="contacts__title title" type="h5" text="Контакти"/>
       <div class="contacts__list">
-        <a href="tel:+380988661614" class="contacts__phone"><b>Телефон:</b>+380988661614</a>
+        <a href="tel:+380969018677" class="contacts__phone"><b>Телефон:</b>+380969018677</a>
         <a href="mailto:justcoda@gmail.com" class="contacts__mail"><b>e-mail:</b>
           justcoda@gmail.com</a>
       </div>
@@ -11,9 +11,7 @@
     <nav class="navigation wrapper">
       <Title class="navigation__title title" type="h5" text="Меню"/>
       <div class="navigation__list">
-        <NuxtLink to="/">Головна сторінка</NuxtLink>
-        <NuxtLink to="/flower-pots">Вазони</NuxtLink>
-        <NuxtLink to="/contacts">Контакти</NuxtLink>
+        <NuxtLink v-for="item of navList" :to="item.to" :key="item.id">{{ item.title }}</NuxtLink>
       </div>
     </nav>
     <div class="social wrapper">
@@ -37,6 +35,10 @@ export default {
     socialList: {
       type: Array,
       require: false
+    },
+    navList: {
+      type: Array,
+      require: false
     }
   }
 };
@@ -48,7 +50,7 @@ export default {
 .wrapper {
   padding: 20px 0;
   @media screen and (max-width: $mediaSWidth) {
-padding: 20px 50px;
+    padding: 20px 50px;
   }
 }
 
@@ -101,6 +103,7 @@ padding: 20px 50px;
       font-size: 1.2rem;
       margin: 5px 0;
       text-align: center;
+
       a {
         color: #3f4960;
       }

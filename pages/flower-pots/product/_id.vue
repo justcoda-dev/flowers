@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProductDetails :product="productById"/>
+    <ProductDetails @addToCart="addProductToCart" :product="productById"/>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     ...mapGetters({productById: "products/productById"})
   },
   methods: {
-    ...mapActions({getProductById: "products/getProductById"})
+    ...mapActions({getProductById: "products/getProductById", addProductToCart: "cart/addProduct"})
   },
   created() {
     if (this.$route.params) {

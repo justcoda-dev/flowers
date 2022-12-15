@@ -1,6 +1,8 @@
 <template>
   <div class='main-page'>
-    <Slider class='main-page__slider' :list='slides'/>
+    <Slider class='main-page__slider'
+            :list='slides'
+    />
     <div class="main-page__features container">
       <TextWithImage
         v-for="feature of features"
@@ -15,13 +17,19 @@
         :banner="banner"
       />
     </div>
-    <!--    <div class="main-page__product-list container">-->
-    <!--      <Product @addProduct="addProduct" v-for="product of products" :product="product"-->
-    <!--               :key="product.id"/>-->
-    <!--    </div>-->
-    <ProductsSlider class="main-page container" @addProduct="addProduct" :list="products"/>
-    <SalesBanner class="main-page__sales-banner container" :banner="saleBanner"/>
-    <Comments class="main-page__comments" :comments="comments"/>
+    <ProductsSlider
+      class="main-page container"
+      @addProduct="addProduct"
+      :list="products"
+    />
+    <SalesBanner
+      class="main-page__sales-banner container"
+      :banner="saleBanner"
+    />
+    <Comments
+      class="main-page__comments"
+      :comments="comments"
+    />
   </div>
 </template>
 
