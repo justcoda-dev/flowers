@@ -161,7 +161,7 @@ export default {
 
   &__home-btn {
     @media screen and (max-width: $mediaMWidth) {
-      display: none;
+      display: none !important;
     }
   }
 
