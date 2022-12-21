@@ -8,6 +8,6 @@ export const features = {
     title: "Завжди на звя'зку +38096 901 86 77",
     image: `${require(`assets/icons/phone-call.png`)}`
   }, {
-    id: 4, title: "Завжди свіжі квіти!", image: `${require(`assets/icons/bouquet.png`)}`
+    id: 4, title: "Тільки свіжі рослини!", image: `${require(`assets/icons/bouquet.png`)}`
   }]
 }

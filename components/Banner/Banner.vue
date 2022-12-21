@@ -88,6 +88,7 @@ export default {
     font-weight: 500;
     opacity: .7;
     transition: .3s;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
   }
 
   &__link {

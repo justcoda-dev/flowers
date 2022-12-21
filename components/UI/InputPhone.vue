@@ -28,8 +28,22 @@ export default {
 
   methods: {
     onInput({target: {value}}) {
-      this.$emit("input", value)
-      this.value = value;
+      this.value = value
+    }
+  },
+  watch: {
+    value(val) {
+      const phoneNumberStart = val.startsWith("380")
+      const phoneLength = val.length === 12
+      if (phoneNumberStart && phoneLength) {
+        this.$emit("change", this.value)
+        this.invalidText = ""
+        this.invalid = false
+      } else {
+        this.$emit("change", "")
+        this.invalid = true
+        this.invalidText = "Перевірте введений номер телефону (формат 380)"
+      }
     }
   }
 }

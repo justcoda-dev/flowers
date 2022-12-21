@@ -20,7 +20,11 @@
       </li>
     </ul>
     <h2 v-else>Корзина пуста. Зробіть ваше замовлення</h2>
+
+
     <Form class="cart-full__form" @click="onSubmitForm"/>
+
+
     <p class="cart-full__item-total-price">Загальна вартість {{ fullPrice }} грн</p>
   </div>
 </template>
@@ -61,7 +65,7 @@ export default {
       this.$emit("onForm", {user: props, cart: this.list, totalPrice: this.fullPrice})
     }
   },
-  computed: {}
+
 }
 </script>
 
@@ -75,13 +79,13 @@ export default {
 .cart-full {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 40px 0;
   min-height: 50px;
 
   &__item {
     display: flex;
     padding: 10px;
-  background: #ecf7f9;
+    background: #ecf7f9;
     margin: 5px 0;
     border-radius: 5px;
   }

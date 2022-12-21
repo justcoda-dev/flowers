@@ -1,19 +1,21 @@
 <template>
-  <div class="comments">
+  <div v-if="comments" class="comments">
     <Comment v-for="(comment, index) of comments"
              :key="comment.id"
              :comment="comment"
              v-if="index === shownCommentIndex"
     />
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
 import Comment from "~/components/Comments/Comment";
+import Loading from "~/components/UI/Loading";
 
 export default {
   name: "Comments",
-  components: {Comment},
+  components: {Loading, Comment},
   props: {
     comments: {
       type: Array,

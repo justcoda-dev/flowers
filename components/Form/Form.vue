@@ -1,7 +1,8 @@
 <template>
   <form class="form" @submit.prevent="">
-    <InputText :placeholder="'Ім\'я та Прізвище'" v-model="userData.name"/>
-    <InputPhone :placeholder="'Телефон у форматі 380'" v-model="userData.phoneNumber"/>
+    <InputText :placeholder="'Ім\'я та Прізвище'" @change="onNameChange"/>
+    <InputPhone :placeholder="'Телефон у форматі 380'"
+                @change="onPhoneInputChange"/>
     <AutocompleteSelect
       @selectItem="onSelectCity"
       v-model="userData.city"
@@ -59,10 +60,12 @@ export default {
     }
   },
   methods: {
-    onPhoneInput(data) {
-      this.userData.phoneNumber = data.value
-      this.invalidPhone = data.invalid
-      console.log(data.invalid)
+    onPhoneInputChange(data) {
+      this.userData.phoneNumber = data
+      console.log(data)
+    },
+    onNameChange(data) {
+      console.log(data)
     },
     onCityInput(value) {
       if (this.timeoutId) clearTimeout(this.timeoutId)
@@ -79,8 +82,6 @@ export default {
               "Limit": "20"
             }
           })
-
-
           this.citiesList = citiesList.map(({
                                               AreaDescription,
                                               RegionsDescription,
@@ -147,8 +148,6 @@ export default {
       this.userData.department = department.option
     },
     onSubmit(selectedData) {
-      console.log(selectedData)
-      // this.$axios.$post("http://localhost:5000/send-email", selectedData)
       this.$emit("click", selectedData)
     }
   }

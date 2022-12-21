@@ -3,9 +3,16 @@ const MUTATION_TYPES = {
 }
 
 export const actions = {
-  async getSaleBanner({commit}) {
-    const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
-    commit(MUTATION_TYPES.GET_SALE_BANNER, saleBanner)
+  async getSaleBanner({commit, dispatch}) {
+    try {
+      const {data: saleBanner} = await this.$axios.$get('sale-banner?populate=image')
+      commit(MUTATION_TYPES.GET_SALE_BANNER, saleBanner)
+    } catch (e) {
+      console.error("getSaleBanner error", e)
+      setTimeout(() => {
+        dispatch("getSaleBanner")
+      }, 5000)
+    }
   }
 }
 

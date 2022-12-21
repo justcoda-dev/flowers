@@ -17,16 +17,18 @@
     </ButtonAdd>
     <AddedStatus v-if="added" :product="product"/>
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
 import AddedStatus from "~/components/UI/AddedStatus";
 import ButtonAdd from "~/components/UI/ButtonAdd";
+import Loading from "~/components/UI/Loading";
 import {debounce} from "~/functionsProject/debounce";
 
 export default {
   name: "Product",
-  components: {AddedStatus, ButtonAdd},
+  components: {Loading, AddedStatus, ButtonAdd},
   props: {
     product: {
       type: Object,
@@ -41,8 +43,8 @@ export default {
       added: false
     }
   },
-  computed:{
-    productIsCome(){
+  computed: {
+    productIsCome() {
       return Object.keys(this.product).length
     }
   },

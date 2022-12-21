@@ -19,8 +19,14 @@ export default {
 
 <style lang="scss" scoped>
 .link {
+  margin: 0 5px;
   &__image {
-    fill: #cb0d29;
+    height: 33px;
+    width: 33px;
+    //filter: invert(12%) sepia(93%) saturate(4364%) hue-rotate(344deg) brightness(93%) contrast(101%);;
+    &:hover {
+      //filter: invert(31%) sepia(73%) saturate(6998%) hue-rotate(340deg) brightness(88%) contrast(102%);
+    }
   }
 }
 </style>

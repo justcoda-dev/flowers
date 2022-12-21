@@ -3,6 +3,7 @@
     <input @input="onInput"
            :placeholder="placeholder"
            class="input-text"
+           :class="{invalid}"
            type="text">
     <span v-if="invalidText" class="help-text">{{ invalidText }}</span>
   </div>
@@ -19,7 +20,7 @@ export default {
   },
   data: () => {
     return {
-      invalid: true,
+      invalid: false,
       invalidText: "",
       value: ""
     }
@@ -27,21 +28,21 @@ export default {
   methods: {
     onInput({target: {value}}) {
       this.value = value
-      this.$emit("input", {value, invalid: this.invalid})
     }
   },
   watch: {
-    // value() {
-    //   console.log(this.value.length)
-    //   if (this.value.length > 4) {
-    //     this.invalid = false
-    //     this.invalidText = ""
-    //   } else {
-    //     this.invalid = true
-    //     this.invalidText = 'введіть ім\'я та прізвище '
-    //   }
-    // }
-  },
+    value() {
+      if (this.value.length > 3) {
+        this.$emit("change", this.value)
+        this.invalidText = ""
+        this.invalid = false
+      } else {
+        this.invalid = true
+        this.$emit("change", '')
+        this.invalidText = "Введіть прізвище там ім'я"
+      }
+    }
+  }
 }
 </script>
 

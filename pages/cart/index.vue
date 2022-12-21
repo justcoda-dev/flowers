@@ -59,6 +59,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/variables";
+.cart {
+  @media screen and (max-width: $mediaMWidth) {
+   margin-top: 50px;
+  }
+}
 .success {
   height: 50vh;
 }

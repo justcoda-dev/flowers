@@ -56,7 +56,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/variables";
+
 .products-page {
+  @media screen and (max-width: $mediaMWidth) {
+    margin-top: 40px;
+  }
+
   &__category-banners {
     display: flex;
     flex-wrap: wrap;
@@ -66,6 +72,9 @@ export default {
 
   &__category-banners-item {
     flex: 0 0 280px;
+    @media screen and (max-width: $mediaMWidth) {
+      flex: 0 0 130px;
+    }
   }
 
   &__product-list {

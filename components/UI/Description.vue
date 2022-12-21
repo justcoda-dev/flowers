@@ -20,6 +20,6 @@ export default {
 <style lang='scss' scoped>
 
 .text {
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
 }
 </style>

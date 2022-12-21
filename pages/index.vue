@@ -12,6 +12,7 @@
     </div>
     <div class="main-page__category-banners container">
       <Banner
+        class="banner"
         v-for="banner of categories"
         :key="banner.id"
         :banner="banner"
@@ -93,6 +94,10 @@ export default {
   max-width: 1920px;
   min-width: 320px;
   margin: 0 auto;
+
+  @media screen and (max-width: $mediaMWidth) {
+    margin: 80px auto 20px auto;
+  }
   // global
   .container {
     margin: 45px 45px 0 45px;
@@ -101,9 +106,8 @@ export default {
   // /global
   // slider
   &__slider {
-    height: 100%;
-    min-height: 600px;
     margin: 30px 15px;
+    animation: ease-in 0.3s aniFromRight;
   }
 
   //  /slider
@@ -111,7 +115,7 @@ export default {
   &__features {
     display: flex;
     flex-wrap: wrap;
-
+    animation: ease-in 1s aniFromLeft;
   }
 
   //  /features
@@ -121,6 +125,11 @@ export default {
     justify-content: center;
     @media screen and (max-width: $mediaLWidth) {
       flex-wrap: wrap;
+    }
+    @media screen and (max-width: $mediaMWidth) {
+      .banner {
+        flex: 0 1 auto;
+      }
     }
   }
 
@@ -170,5 +179,25 @@ export default {
     }
   }
 }
+
+@keyframes aniFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes aniFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
 </style>
 <!--populate-->

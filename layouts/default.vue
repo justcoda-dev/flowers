@@ -1,9 +1,10 @@
 <template>
   <div class='layout'>
-    <Header :navList="navList"
+    <Header class="header-animation" :navList="navList"
             :cartFullPrice="getCartFullPrice"
             :cart="getCart"
             :cartCount="getCartCount"
+            :socialList="socialList"
     />
     <div class='content'>
       <Nuxt/>
@@ -29,26 +30,26 @@ export default {
       navList: [
         {id: 1, to: "/", title: "Головна"},
         {id: 2, to: "/flower-pots", title: "Кімнатні рослини"},
-        {id: 3, to: "/cart", title: "Корзина"},
-        {id: 4, to: "/contacts", title: "Контакти"}],
+        {id: 3, to: "/cart", title: "Корзина"}],
+        // {id: 4, to: "/contacts", title: "Контакти"}],
       socialList: [
         {
           id: 1,
           name: "Facebook",
           link: "https://www.facebook.com/profile.php?id=100063916003238",
-          icon: `${require(`assets/icons/icons8-facebook.svg`)}`
+          icon: `${require(`assets/icons/facebook.png`)}`
         },
         {
           id: 2,
           name: "Instagram",
           link: "https://www.instagram.com/orch_flower/",
-          icon: `${require(`assets/icons/icons8-instagram.svg`)}`
+          icon: `${require(`assets/icons/instagram.png`)}`
         },
         {
           id: 3,
           name: "TikTok",
-          link: "tiktok.com",
-          icon: `${require(`assets/icons/icons8-tiktok.svg`)}`
+          link: "https://vm.tiktok.com/ZMFGNxaX2",
+          icon: `${require(`assets/icons/tiktok.png`)}`
         }]
     }
   },
@@ -76,9 +77,19 @@ export default {
   @media screen and (max-width: $mediaMWidth) {
     margin: 10px;
   }
-
+  .header-animation {
+    animation: ease-in-out 0.5s aniFromTop;
+  }
   .content {
     flex: 1 0 auto;
+  }
+}
+@keyframes aniFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 </style>

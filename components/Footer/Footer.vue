@@ -4,8 +4,8 @@
       <Title class="contacts__title title" type="h5" text="Контакти"/>
       <div class="contacts__list">
         <a href="tel:+380969018677" class="contacts__phone"><b>Телефон:</b>+380969018677</a>
-        <a href="mailto:justcoda@gmail.com" class="contacts__mail"><b>e-mail:</b>
-          justcoda@gmail.com</a>
+        <span class="contacts__address"><b>Адреса:  </b>смт.Віньківці, вул.Гагаріна 3</span>
+
       </div>
     </div>
     <nav class="navigation wrapper">
@@ -69,7 +69,7 @@ export default {
     &__list {
       display: flex;
       flex-direction: column;
-
+      text-align: center;
       a {
         font-size: 1.2rem;
         margin: 5px 0;
@@ -81,8 +81,8 @@ export default {
       color: #3f4960;
     }
 
-    &__mail {
-      color: #3f4960;
+    &__address {
+      font-size: 1.2rem;
     }
   }
 

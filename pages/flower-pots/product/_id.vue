@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <ProductDetails @addToCart="addProductToCart" :product="productById"/>
-  </div>
+  <ProductDetails v-if="productById" @addToCart="addProductToCart" :product="productById"/>
+  <Loading v-else/>
 </template>
 
 <script>
 import Product from "~/components/Product/Product";
 import ProductDetails from "~/components/ProductDetails/ProductDetails";
 import {mapGetters, mapActions} from "vuex"
+import Loading from "~/components/UI/Loading";
 
 export default {
   name: "idPage",
-  components: {ProductDetails, Product},
+  components: {Loading, ProductDetails, Product},
   computed: {
     ...mapGetters({productById: "products/productById"})
   },
@@ -20,13 +20,12 @@ export default {
   },
   created() {
     if (this.$route.params) {
-      console.log(this.$route.params.id)
       this.getProductById(this.$route.params.id)
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

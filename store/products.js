@@ -5,22 +5,32 @@ const MUTATION_TYPES = {
 }
 
 export const actions = {
-  async getProducts({commit}) {
-    const {data: products} = await this.$axios.$get('products?populate=image')
-    commit(MUTATION_TYPES.GET_PRODUCTS, products)
+  async getProducts({commit, dispatch}) {
+    try {
+      const {data: products} = await this.$axios.$get('products?populate=image')
+      commit(MUTATION_TYPES.GET_PRODUCTS, products)
+    } catch (e) {
+      console.error("getProducts error", e)
+      setTimeout(() => {
+        dispatch("getProducts")
+      }, 5000)
+    }
   },
   async getProductsByCategory({commit}, category) {
     try {
       const {data: productsByCategory} = await this.$axios.$get(`${category}?populate=deep`)
-      console.log(productsByCategory)
       commit(MUTATION_TYPES.GET_PRODUCTS_BY_CATEGORY, productsByCategory.attributes?.products?.data)
     } catch (e) {
       commit(MUTATION_TYPES.GET_PRODUCTS_BY_CATEGORY, [])
     }
   },
   async getProductById({commit}, id) {
-    const {data: product} = await this.$axios.$get(`products/${id}?populate=image`)
-    commit(MUTATION_TYPES.GET_PRODUCT_BY_ID, product)
+    try {
+      const {data: product} = await this.$axios.$get(`products/${id}?populate=image`)
+      commit(MUTATION_TYPES.GET_PRODUCT_BY_ID, product)
+    } catch (e) {
+      console.error("get product by id error", e)
+    }
   }
 }
 

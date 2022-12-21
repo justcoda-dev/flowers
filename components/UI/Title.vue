@@ -53,7 +53,7 @@ export default {
 }
 
 .h2 {
-  font-size: clamp(2.5rem, 10vw, 3.5rem);
+  font-size: clamp(2.8rem, 10vw, 3.5rem);
   font-weight: 900;
 }
 

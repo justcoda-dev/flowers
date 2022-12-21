@@ -7,7 +7,6 @@ const MUTATION_TYPES = {
 
 export const actions = {
   getFeatures({commit}) {
-    // const {data: products} = await this.$axios.$get('flower-pots?populate=image')
     commit(MUTATION_TYPES.GET_FEATURES, features.data)
   }
 }

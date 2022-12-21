@@ -1,5 +1,6 @@
 <template>
-  <div @mouseenter="onSliderMouseEnter" @mouseleave="onSliderMouseLeave" class='slider'>
+  <div v-if="list.length" @mouseenter="onSliderMouseEnter" @mouseleave="onSliderMouseLeave"
+       class='slider'>
     <ArrowButton v-if="showArrowButton" class="slider__left-btn" type='left'
                  @click='onArrowButtonClickPreviousHandler'/>
     <ArrowButton v-if="showArrowButton" class="slider__right-btn" type='right'
@@ -16,16 +17,18 @@
     </ul>
 
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
 
 import Slide from '@/components/Slider/Slide'
 import ArrowButton from '@/components/UI/ArrowButton'
+import Loading from "~/components/UI/Loading";
 
 export default {
   name: 'Slider',
-  components: {Slide, ArrowButton},
+  components: {Loading, Slide, ArrowButton},
   props: {
     list: {
       type: Array,
@@ -48,9 +51,17 @@ export default {
   methods: {
     onArrowButtonClickNextHandler() {
       this.slidePageIndex = this.slidePageIndex < this.maxPages ? this.slidePageIndex + 1 : 0
+      clearInterval(this.sliderInterval)
+      this.sliderInterval = setInterval(() => {
+        this.onArrowButtonClickNextHandler()
+      }, 10000)
     },
     onArrowButtonClickPreviousHandler() {
       this.slidePageIndex = this.slidePageIndex !== 0 ? this.slidePageIndex - 1 : this.maxPages
+      clearInterval(this.sliderInterval)
+      this.sliderInterval = setInterval(() => {
+        this.onArrowButtonClickNextHandler()
+      }, 10000)
     },
     onSliderMouseEnter() {
       this.showArrowButton = true
@@ -75,7 +86,7 @@ export default {
 @import "assets/variables";
 
 .slider {
-  height: 100%;
+  height: 70vh;
   min-height: 300px;
   position: relative;
   box-sizing: border-box;
@@ -109,7 +120,7 @@ export default {
   }
 
   .slider-list {
-    height: 600px;
+    height: 100%;
     list-style: none;
     padding: 0;
     margin: 0;

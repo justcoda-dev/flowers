@@ -65,7 +65,9 @@ export default {
   padding: 40px;
   @media screen and (max-width: $mediaMWidth) {
     padding: 20px 10px;
-    margin: auto;
+    margin: 50px auto;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -81,18 +83,23 @@ export default {
 
   @media screen and (max-width: $mediaMWidth) {
     margin: auto;
+    max-width: 100%;
   }
 
   &__image {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: auto;
     max-height: 500px;
-
+    overflow: hidden;
+    @media screen and (max-width: $mediaMWidth) {
+      margin: auto;
+      max-width: 70%;
+    }
     img {
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
-      height: 100%;
+      height: auto;
       width: 100%;
       min-height: 140px;
       min-width: 120px;
@@ -130,7 +137,11 @@ export default {
 .text-block {
   margin-left: 40px;
   max-width: 50%;
-
+  @media screen and (max-width: $mediaMWidth) {
+    margin: auto;
+    max-width: 100%;
+    padding: 0 10px;
+  }
   &__price {
     font-size: 1.4rem;
   }

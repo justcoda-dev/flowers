@@ -6,7 +6,6 @@ const MUTATION_TYPES = {
 }
 export const actions = {
   async getCategories({commit}) {
-    // const {data: categories} = await this.$axios.$get('category-banners?populate=image')
     commit(MUTATION_TYPES.GET_PRODUCT_CATEGORIES, categories.data)
   }
 }

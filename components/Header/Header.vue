@@ -2,20 +2,30 @@
   <header class='header'>
     <div class='header__logo'>
       <div class='header__logo-image'>
-        <NuxtLink to="/">КВІТНИЧОК</NuxtLink>
+        <NuxtLink to="/">
+          <img :src="require('static/logo.png')" alt="#">
+        </NuxtLink>
+      </div>
+      <div class="header__social-wrapper">
+        <div class="header__social">
+          <SocialLink
+            class="social__link"
+            v-for="social of socialList"
+            :key="social.id"
+            :social="social"/>
+        </div>
       </div>
     </div>
     <div class='header__nav'>
       <ButtonHome
-        v-if="!mobile"
+        class="header__home-btn"
         @click="onHomeButtonClick"
       />
       <MobileNavMenu
         class="nav-list-mobile"
-        v-if="mobile"
         :list="navList"
       />
-      <nav v-else class='nav-list-desktop'>
+      <nav class='nav-list-desktop'>
         <NuxtLink
           class='nav-list-desktop__item'
           v-for='navItem of navList'
@@ -39,11 +49,11 @@ import MobileNavMenu from "~/components/MobileNavMenu/MobileNavMenu";
 import ButtonCart from "~/components/UI/ButtonCart";
 import ButtonHome from "~/components/UI/ButtonHome";
 import ButtonIcon from '~/components/UI/ButtonIcon'
-import {debounce} from "~/functionsProject/debounce";
+import SocialLink from "~/components/Social/SocialLink";
 
 export default {
   name: 'Header',
-  components: {CartHeader, ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon},
+  components: {CartHeader, ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon, SocialLink},
   props: {
     navList: {
       type: Array,
@@ -60,11 +70,14 @@ export default {
     cartFullPrice: {
       type: [String, Number],
       require: true
+    },
+    socialList: {
+      type: Array,
+      require: true
     }
   },
   data: () => {
     return {
-      mobile: false,
       showMobileMenu: false,
       debounceTime: 100,
       mobileMode: 900
@@ -74,30 +87,13 @@ export default {
     onMobileButtonToggle() {
       this.showMobileMenu = !this.showMobileMenu
     },
-    windowsWidthWatching() {
-      const debouncedFn = debounce(({target: {innerWidth}}) => {
-        if (innerWidth < this.mobileMode) {
-          this.mobile = true
-        } else {
-          this.mobile = false
-        }
-      }, this.debounceTime)
-      if (window.innerWidth < this.mobileMode) {
-        this.mobile = true
-      }
-      window.addEventListener("resize", debouncedFn)
-    },
+
     onHomeButtonClick() {
       this.$router.push("/")
     }
 
   },
-  created() {
 
-  },
-  mounted() {
-    this.windowsWidthWatching()
-  }
 }
 </script>
 
@@ -108,6 +104,14 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+  @media screen and (max-width: $mediaMWidth) {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
   // logo block
   &__logo {
     display: flex;
@@ -117,18 +121,48 @@ export default {
     height: 85px;
     padding: 5px 50px;
     box-sizing: border-box;
+    @media screen and (max-width: $mediaMWidth) {
+      display: none;
+    }
   }
 
-  &__logo-text {
-    font-size: .9rem;
+
+  &__social-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__logo-image {
+    a {
+      display: block;
+    }
 
+    img {
+      height: 110px;
+      width: 110px;
+    }
+  }
+
+  &__social {
+
+  }
+
+  &__contacts {
+    a {
+      font-weight: 500;
+      color: $fontColor;
+    }
   }
 
   &__logo-search {
 
+  }
+
+  &__home-btn {
+    @media screen and (max-width: $mediaMWidth) {
+      display: none;
+    }
   }
 
   // navigation
@@ -138,15 +172,7 @@ export default {
     justify-content: space-between;
     background: $headerNavBackground;
     min-height: 70px;
-    @media screen and (max-width: $mediaMWidth) {
-      position: fixed;
-      z-index: 100;
-      width: 100%;
-      left: 0;
-      right: 0;
-      top: 0;
 
-    }
   }
 
   &__cart {
@@ -161,6 +187,9 @@ export default {
   background: $headerNavListBackground;
   padding: 0;
   margin: 0;
+  @media screen and (max-width: $mediaMWidth) {
+    display: none;
+  }
 
   &__item {
     display: block;
@@ -195,5 +224,8 @@ export default {
 
 .nav-list-mobile {
   padding: 0 20px;
+  @media screen and (min-width: $mediaMWidth) {
+    display: none;
+  }
 }
 </style>

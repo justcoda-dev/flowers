@@ -4,10 +4,14 @@ const MUTATION_TYPES = {
 }
 
 export const actions = {
-  async getComments({commit}) {
-    const {data: comments} = await this.$axios.$get('comments?populate=icon')
-    console.log(comments)
-    commit(MUTATION_TYPES.GET_COMMENTS, comments)
+  async getComments({commit, dispatch}) {
+    try {
+      const {data: comments} = await this.$axios.$get('comments?populate=icon')
+      commit(MUTATION_TYPES.GET_COMMENTS, comments)
+    } catch (e) {
+      console.error("getComments error", e)
+      dispatch("getComments")
+    }
   }
 }
 

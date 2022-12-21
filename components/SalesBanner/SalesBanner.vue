@@ -1,6 +1,6 @@
 <template>
-  <div class="sales-banner">
-    <img v-if="propsIsCome" class="sales-banner__image"
+  <div v-if="propsIsCome" class="sales-banner">
+    <img class="sales-banner__image"
          :src="`https://api.kvitnychok.store${banner.attributes?.image?.data?.attributes?.url}`"
          alt="#">
     <div class="sales-banner__text-block">
@@ -13,23 +13,25 @@
       </ButtonGreen>
     </div>
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
 import ButtonGreen from "~/components/UI/ButtonGreen";
+import Loading from "~/components/UI/Loading";
 import Title from "~/components/UI/Title";
 
 export default {
   name: "SalesBanner",
-  components: {ButtonGreen, Title},
+  components: {Loading, ButtonGreen, Title},
   props: {
     banner: {
       type: Object,
       require: true
     },
   },
-  computed:{
-    propsIsCome(){
+  computed: {
+    propsIsCome() {
       return Object.keys(this.banner).length
     }
   }
@@ -45,9 +47,10 @@ export default {
   display: flex;
   height: 450px;
   background: $bodyBackground;
-@media screen and (max-width: $mediaSWidth) {
-  height: 350px;
-}
+  @media screen and (max-width: $mediaSWidth) {
+    height: 350px;
+  }
+
   &__image {
     object-fit: cover;
     object-position: center;
@@ -63,7 +66,7 @@ export default {
     height: 100%;
     right: 0;
     position: absolute;
-    @media screen and (max-width: $mediaMWidth){
+    @media screen and (max-width: $mediaMWidth) {
       width: 100%;
     }
   }

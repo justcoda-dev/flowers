@@ -6,12 +6,15 @@ const MUTATION_TYPES = {
 }
 
 export const actions = {
-  async getSlides({commit}) {
+  async getSlides({commit, dispatch}) {
     try {
       const {data: slides} = await this.$axios.$get('slides?populate=image')
       commit(MUTATION_TYPES.GET_SLIDES, slides)
     } catch (e) {
-      console.error("action products", e)
+      console.error("action getSlides", e)
+      setTimeout(() => {
+        dispatch("getSlides")
+      }, 5000)
     }
   }
 }
