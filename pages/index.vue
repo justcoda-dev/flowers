@@ -128,7 +128,7 @@ export default {
     }
     @media screen and (max-width: $mediaMWidth) {
       .banner {
-        flex: 0 1 auto;
+        flex: 0 1 auto !important;
       }
     }
   }

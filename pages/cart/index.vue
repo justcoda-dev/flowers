@@ -74,6 +74,9 @@ export default {
 }
 
 .success {
-  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
 }
 </style>

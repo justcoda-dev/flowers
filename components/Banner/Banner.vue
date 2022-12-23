@@ -83,12 +83,12 @@ export default {
     z-index: 1;
     top: 25%;
     left: 10%;
-    color: $sliderTitle;
+    color: $sliderTitle !important;
     text-transform: uppercase;
     font-weight: 500;
     opacity: .7;
     transition: .3s;
-    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 5vw, 3.5rem) !important;
   }
 
   &__link {
