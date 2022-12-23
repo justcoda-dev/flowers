@@ -21,11 +21,16 @@
     </ul>
     <h2 v-else>Корзина пуста. Зробіть ваше замовлення</h2>
 
+    <Form
+      class="cart-full__form"
+      @click="onSubmitForm"
+      :cartIsNotEmpty="!!fullPrice"
+      :loading="loading"
+    />
 
-    <Form class="cart-full__form" @click="onSubmitForm"/>
-
-
-    <p class="cart-full__item-total-price">Загальна вартість {{ fullPrice }} грн</p>
+    <p class="cart-full__item-total-price">
+      Загальна вартість {{ fullPrice }} грн
+    </p>
   </div>
 </template>
 
@@ -43,10 +48,13 @@ export default {
       require: true
     },
     fullPrice: {
-      type: [String, Number],
+      type: Number,
       require: true
     },
-
+    loading: {
+      type: Boolean,
+      require: true
+    }
   },
   methods: {
     onAcceptClick() {
@@ -127,7 +135,7 @@ export default {
   }
 
   &__form {
-    padding: 0 20px;
+
   }
 
   &__item-total-price {

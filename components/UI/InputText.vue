@@ -1,11 +1,20 @@
 <template>
-  <div class="input-text-wrapper">
-    <input @input="onInput"
-           :placeholder="placeholder"
-           class="input-text"
-           :class="{invalid}"
-           type="text">
-    <span v-if="invalidText" class="help-text">{{ invalidText }}</span>
+  <div class="input-text">
+    <div
+      class="input-text__wrapper"
+      :class="{invalid}">
+      <input
+        @input="onInput"
+        :placeholder="placeholder"
+        class="input-text__input"
+        type="text">
+    </div>
+    <span
+      v-if="invalidText"
+      class="input-text__help-text"
+    >
+      {{ invalidText }}
+    </span>
   </div>
 </template>
 
@@ -48,20 +57,28 @@ export default {
 
 <style lang="scss" scoped>
 .input-text {
-  width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-  font-size: 20px;
-  color: #60666d;
+  &__wrapper {
+    position: relative;
+    min-width: 170px;
+    padding: 15px 10px;
+    background: #ffffff;
+    box-shadow: 0 0 5px #afadad;
+  }
 
-  padding: 15px 10px;
-  background: #ffffff;
-  box-shadow: 0 0 5px #afadad;
-}
+  &__input {
+    width: 100%;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #60666d;
+    box-sizing: border-box;
+    height: 100%;
+  }
 
-.help-text {
-  color: red;
+  &__help-text {
+    color: red;
+  }
 }
 
 .invalid {

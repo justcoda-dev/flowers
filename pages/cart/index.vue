@@ -1,6 +1,7 @@
 <template>
   <div class="cart">
     <CartFull
+      :loading="loading"
       v-if="!success"
       @minusClick="minusProduct"
       @plusClick="addProduct"
@@ -27,7 +28,8 @@ export default {
   components: {Title, CartFull},
   data: () => {
     return {
-      success: false
+      success: false,
+      loading: false
     }
   },
   methods: {
@@ -37,12 +39,16 @@ export default {
       cleanCart: "cart/cleanCart"
     }),
     async onForm(data) {
-      this.success = true
-      this.cleanCart()
       try {
+        this.loading = true
         const response = await this.$axios.post("https://mail.kvitnychok.store/send-email", {data})
-        console.log(response)
+        if (response.status === 200) {
+          this.success = true
+          this.cleanCart()
+          this.loading = false
+        }
       } catch (e) {
+        this.loading = false
         console.error(e)
       }
 
@@ -60,11 +66,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "assets/variables";
+
 .cart {
   @media screen and (max-width: $mediaMWidth) {
-   margin-top: 50px;
+    margin-top: 50px;
   }
 }
+
 .success {
   height: 50vh;
 }

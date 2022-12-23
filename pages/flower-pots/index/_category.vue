@@ -1,6 +1,6 @@
 <template>
   <div class="products">
-<!--    <div class="products__filters">filter</div>-->
+    <!--    <div class="products__filters">filter</div>-->
     <div class="products__product-list">
       <Product v-if="products.length"
                @addProduct="addProduct"
@@ -34,7 +34,7 @@ export default {
   created() {
     if (this.$route.params.category) {
       this.getProductsByCategory(this.$route.params.category)
-      console.log(this.products)
+
     } else {
       this.getProducts()
     }

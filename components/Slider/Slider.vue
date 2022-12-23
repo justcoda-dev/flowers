@@ -17,7 +17,6 @@
     </ul>
 
   </div>
-  <Loading v-else/>
 </template>
 
 <script>
@@ -86,7 +85,7 @@ export default {
 @import "assets/variables";
 
 .slider {
-  height: 70vh;
+  height: auto;
   min-height: 300px;
   position: relative;
   box-sizing: border-box;

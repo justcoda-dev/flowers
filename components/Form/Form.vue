@@ -1,8 +1,13 @@
 <template>
   <form class="form" @submit.prevent="">
-    <InputText :placeholder="'Ім\'я та Прізвище'" @change="onNameChange"/>
-    <InputPhone :placeholder="'Телефон у форматі 380'"
-                @change="onPhoneInputChange"/>
+    <InputText
+      :placeholder="'Ім\'я та Прізвище'"
+      @change="onNameChange"
+    />
+    <InputPhone
+      :placeholder="'Телефон у форматі 380'"
+      @change="onPhoneInputChange"
+    />
     <AutocompleteSelect
       @selectItem="onSelectCity"
       v-model="userData.city"
@@ -31,6 +36,16 @@ import SelectCustom from "~/components/UI/SelectCustom";
 export default {
   name: "Form",
   components: {InputPhone, SelectCustom, ButtonConfirm, AutocompleteSelect, InputText},
+  props: {
+    cartIsNotEmpty: {
+      type: Boolean,
+      require: true
+    },
+    loading: {
+      type: Boolean,
+      require: true
+    }
+  },
   data: () => {
     return {
       citiesList: [],
@@ -48,9 +63,12 @@ export default {
     }
   },
   watch: {
+    loading(val) {
+      this.disabled = val
+    },
     userData: {
       handler({city, department, name, phoneNumber}) {
-        if (city && department && name && phoneNumber) {
+        if (city && department && name && phoneNumber && this.cartIsNotEmpty) {
           this.disabled = false
         } else {
           this.disabled = true
@@ -60,12 +78,11 @@ export default {
     }
   },
   methods: {
-    onPhoneInputChange(data) {
-      this.userData.phoneNumber = data
-      console.log(data)
+    onPhoneInputChange(phone) {
+      this.userData.phoneNumber = phone
     },
-    onNameChange(data) {
-      console.log(data)
+    onNameChange(name) {
+      this.userData.name = name
     },
     onCityInput(value) {
       if (this.timeoutId) clearTimeout(this.timeoutId)

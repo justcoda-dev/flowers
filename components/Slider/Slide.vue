@@ -40,7 +40,6 @@ export default {
 @import "assets/variables";
 
 .slide {
-  height: 100%;
   min-height: 300px;
   display: flex;
   align-items: center;
@@ -48,10 +47,13 @@ export default {
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  height: 500px;
   @media screen and (max-width: $mediaMWidth) {
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    height: 300px;
   }
+
 
   &:before {
     content: "";
@@ -68,7 +70,10 @@ export default {
     margin: 50px;
     z-index: 1;
     @media screen and (max-width: $mediaMWidth) {
-      text-align: center;
+      margin: 20px;
+    }
+    @media screen and (min-width: $mediaLWidth) {
+      margin-left: 150px;
     }
     //background: rgba(0, 0, 0, 0.45);
   }
@@ -77,7 +82,7 @@ export default {
     font-family: 'Fira Sans', sans-serif;
     color: #000000;
     font-weight: 700;
-  opacity: .8;
+    opacity: .8;
   }
 
   &__title-description {

@@ -1,11 +1,20 @@
 <template>
-  <div class="input-phone-wrapper">
-    <input @input="onInput" :placeholder="placeholder" class="input-phone"
-           :class="{invalid}"
-           type="number"
-           maxlength="13"
+  <div class="input-phone">
+    <div class="input-phone__wrapper" :class="{invalid}">
+      <input
+        class="input-phone__input"
+        type="number"
+        maxlength="13"
+        @input="onInput"
+        :placeholder="placeholder"
+      >
+    </div>
+    <span
+      v-if="invalidText"
+      class="input-phone__help-text"
     >
-    <span v-if="invalidText" class="help-text">{{ invalidText }}</span>
+      {{ invalidText }}
+    </span>
   </div>
 </template>
 
@@ -59,25 +68,29 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-.input-phone-wrapper {
-
-}
-
-.help-text {
-  color: red;
-}
-
 .input-phone {
-  width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-  font-size: 20px;
-  color: #60666d;
+  &__wrapper {
+    position: relative;
+    min-width: 170px;
+    padding: 15px 10px;
+    background: #ffffff;
+    box-shadow: 0 0 5px #afadad;
+  }
 
-  padding: 15px 10px;
-  background: #ffffff;
-  box-shadow: 0 0 5px #afadad;
+  &__input {
+    width: 100%;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #60666d;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  &__help-text {
+    color: red;
+  }
 }
 
 .invalid {
