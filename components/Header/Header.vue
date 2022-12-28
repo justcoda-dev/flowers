@@ -35,10 +35,12 @@
         </NuxtLink>
       </nav>
       <CartHeader
-        class="header__cart" :cartCount="cartCount"
+        class="header__cart"
+        :cartCount="cartCount"
         :cartFullPrice="cartFullPrice"
         :productsList="cart"
       />
+
     </div>
   </header>
 </template>
@@ -53,7 +55,10 @@ import SocialLink from "~/components/Social/SocialLink";
 
 export default {
   name: 'Header',
-  components: {CartHeader, ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon, SocialLink},
+  components: {
+
+    CartHeader, ButtonCart, ButtonHome, MobileNavMenu, ButtonIcon, SocialLink
+  },
   props: {
     navList: {
       type: Array,
@@ -80,7 +85,6 @@ export default {
     return {
       showMobileMenu: false,
       debounceTime: 100,
-      mobileMode: 900
     }
   },
   methods: {
@@ -106,6 +110,7 @@ export default {
   position: relative;
   @media screen and (max-width: $mediaMWidth) {
     position: fixed;
+    height: 70px;
     z-index: 100;
     width: 100%;
     left: 0;
@@ -176,7 +181,11 @@ export default {
   }
 
   &__cart {
+
+
   }
+
+
 }
 
 .nav-list-desktop {

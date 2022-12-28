@@ -3,11 +3,8 @@
     <figure class="banner__image-wrapper" :class="{isActive}">
       <img class="banner__image"
            :src="banner.attributes?.image?.data?.attributes?.url" alt="">
-      <Title class="banner__title" type="h3" :text="banner.attributes?.title"/>
-      <NuxtLink class="banner__link" :to="banner.attributes?.to">
-        Переглянути
-      </NuxtLink>
     </figure>
+    <Title class="banner__title" type="h3" :text="banner.attributes?.title"/>
   </div>
 </template>
 
@@ -58,6 +55,7 @@ export default {
   display: flex;
   flex: 0 1 280px;
   cursor: pointer;
+  position: relative;
 
   &__image {
     width: 100%;
@@ -70,7 +68,6 @@ export default {
   }
 
   &__image-wrapper {
-    position: relative;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -81,8 +78,9 @@ export default {
   &__title {
     position: absolute;
     z-index: 1;
-    top: 25%;
-    left: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: $sliderTitle !important;
     text-transform: uppercase;
     font-weight: 500;

@@ -24,6 +24,7 @@
 import Slide from '@/components/Slider/Slide'
 import ArrowButton from '@/components/UI/ArrowButton'
 import Loading from "~/components/UI/Loading";
+import {debounce} from "~/functionsProject/debounce";
 
 export default {
   name: 'Slider',
@@ -40,6 +41,7 @@ export default {
       slidePageIndex: 0,
       sliderInterval: 0,
       showArrowButton: false,
+      mobile: false
     }
   },
   computed: {
@@ -63,17 +65,36 @@ export default {
       }, 10000)
     },
     onSliderMouseEnter() {
-      this.showArrowButton = true
+      if (!this.mobile) {
+        this.showArrowButton = true
+      }
     },
     onSliderMouseLeave() {
-      this.showArrowButton = false
-
+      if (!this.mobile) {
+        this.showArrowButton = false
+      }
     },
+    resizeWatching() {
+      const debouncedCb = debounce(() => {
+        const screenWidth = window.innerWidth
+        if (screenWidth < 900) {
+          this.mobile = true
+          this.showArrowButton = true
+        } else {
+          this.mobile = false
+        }
+      }, 300)
+
+      debouncedCb()
+      window.addEventListener("resize", debouncedCb)
+    }
   },
   mounted() {
     this.sliderInterval = setInterval(() => {
       this.onArrowButtonClickNextHandler()
     }, 10000)
+
+    this.resizeWatching()
   },
   beforeDestroy() {
     clearInterval(this.sliderInterval)

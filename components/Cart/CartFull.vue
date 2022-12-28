@@ -89,13 +89,16 @@ export default {
   padding: 0;
   margin: 0 0 40px 0;
   min-height: 50px;
+  box-sizing: border-box;
+
 
   &__item {
     display: flex;
     padding: 10px;
-    background: #ecf7f9;
+    border: 1px solid #ecf7f9;
     margin: 5px 0;
     border-radius: 5px;
+
   }
 
   &__info {

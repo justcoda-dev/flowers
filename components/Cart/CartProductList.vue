@@ -2,7 +2,8 @@
   <ul class="cart-list">
     <li class="cart-list__item" v-for="product of list">
       <img class="cart-list__item-image"
-           :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`" alt="">
+           :src="`https://api.kvitnychok.store${product.attributes?.image?.data?.attributes?.url}`"
+           alt="">
       <div class="cart-list__item-description">
         <p class="cart-list__item-title">{{ product.attributes?.title }}</p>
         <p class="cart-list__item-count"> {{ product.attributes?.count }} шт x
@@ -32,10 +33,16 @@ export default {
   padding: 0;
   margin: 0;
   min-height: 50px;
+  overflow: auto;
+  max-width: 100%;
+  box-sizing: border-box;
 
   &__item {
     display: flex;
     padding: 10px;
+    border: 1px solid #ecf7f9;
+    margin: 5px 0;
+    border-radius: 5px;
   }
 
   &__item-image {

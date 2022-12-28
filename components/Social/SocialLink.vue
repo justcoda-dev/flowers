@@ -18,14 +18,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/variables";
+
 .link {
   margin: 0 5px;
+
   &__image {
     height: 33px;
     width: 33px;
-    //filter: invert(12%) sepia(93%) saturate(4364%) hue-rotate(344deg) brightness(93%) contrast(101%);;
-    &:hover {
-      //filter: invert(31%) sepia(73%) saturate(6998%) hue-rotate(340deg) brightness(88%) contrast(102%);
+    @media screen and (max-width: $mediaMWidth) {
+      height: 53px;
+      width: 53px;
     }
   }
 }

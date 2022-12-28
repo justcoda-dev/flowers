@@ -55,10 +55,6 @@ export default {
 @import "assets/variables";
 
 .products-page {
-  @media screen and (max-width: $mediaMWidth) {
-    margin-top: 40px;
-  }
-
   &__category-banners {
     display: flex;
     flex-wrap: wrap;

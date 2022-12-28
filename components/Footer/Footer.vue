@@ -3,27 +3,50 @@
     <div class="contacts wrapper">
       <Title class="contacts__title title" type="h5" text="Контакти"/>
       <div class="contacts__list">
-        <a href="tel:+380969018677" class="contacts__phone"><b>Телефон:</b>+380969018677</a>
-        <span class="contacts__address"><b>Адреса:  </b>смт.Віньківці, вул.Гагаріна 3</span>
-
+        <a href="tel:+380969018677"
+           class="contacts__phone">
+          <b>Телефон:</b>
+          +380969018677
+        </a>
+        <span class="contacts__address">
+          <b>Адреса:  </b>
+          смт.Віньківці, вул.Гагаріна 3
+        </span>
       </div>
     </div>
     <nav class="navigation wrapper">
-      <Title class="navigation__title title" type="h5" text="Меню"/>
+      <Title
+        class="navigation__title title"
+        type="h5"
+        text="Меню"
+      />
       <div class="navigation__list">
-        <NuxtLink v-for="item of navList" :to="item.to" :key="item.id">{{ item.title }}</NuxtLink>
+        <NuxtLink
+          v-for="item of navList"
+          :to="item.to"
+          :key="item.id"
+        >
+          {{ item.title }}
+        </NuxtLink>
       </div>
     </nav>
     <div class="social wrapper">
-      <Title class="social__title title" type="h5" text="Підписуйся"/>
+      <Title
+        class="social__title title"
+        type="h5"
+        text="Підписуйся"
+      />
       <div class="social__list">
-        <SocialLink class="social__link" v-for="social of socialList" :key="social.id"
-                    :social="social"/>
+        <SocialLink
+          class="social__link"
+          v-for="social of socialList"
+          :key="social.id"
+          :social="social"
+        />
       </div>
     </div>
   </footer>
 </template>
-
 <script>
 import SocialLink from "~/components/Social/SocialLink";
 import Title from "~/components/UI/Title";
@@ -49,9 +72,6 @@ export default {
 
 .wrapper {
   padding: 20px 0;
-  @media screen and (max-width: $mediaSWidth) {
-    padding: 20px 50px;
-  }
 }
 
 .footer {
@@ -59,6 +79,12 @@ export default {
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 20px 0;
+  @media screen and (max-width: $mediaMWidth) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .title {
     text-align: center;
@@ -70,9 +96,13 @@ export default {
       display: flex;
       flex-direction: column;
       text-align: center;
+
       a {
         font-size: 1.2rem;
         margin: 5px 0;
+        @media screen and (max-width: $mediaMWidth) {
+          font-size: 1.6rem;
+        }
       }
     }
 
@@ -83,6 +113,10 @@ export default {
 
     &__address {
       font-size: 1.2rem;
+      margin: 5px 0;
+      @media screen and (max-width: $mediaMWidth) {
+        font-size: 1.6rem;
+      }
     }
   }
 
@@ -90,9 +124,9 @@ export default {
     display: flex;
     flex-direction: column;
 
-
     &__list {
-      margin: auto;
+      margin: 5px auto;
+
     }
   }
 
@@ -101,11 +135,14 @@ export default {
       display: flex;
       flex-direction: column;
       font-size: 1.2rem;
-      margin: 5px 0;
       text-align: center;
+      @media screen and (max-width: $mediaMWidth) {
+        font-size: 1.6rem;
+      }
 
       a {
         color: #3f4960;
+        margin: 5px;
       }
     }
   }

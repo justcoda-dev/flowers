@@ -1,11 +1,22 @@
 <template>
-  <div v-if="list.length" class="products-slider" ref="slider-wrapper">
-    <ArrowButton class="products-slider__left-btn" @click="onArrowButtonClickPreviousHandler"
-                 type="left"/>
-    <ArrowButton class="products-slider__right-btn" @click="onArrowButtonClickNextHandler"
-                 type="right"/>
-    <div class="products-slider__list"
-         :style="{ transform: `translate3d(${transformPx}px, 0px, 0px) `, width:`${listWidth}px`}">
+  <div
+    v-if="list.length"
+    class="products-slider"
+    ref="slider-wrapper"
+  >
+    <ArrowButton
+      class="products-slider__left-btn"
+      @click="onArrowButtonClickPreviousHandler"
+      type="left"/>
+    <ArrowButton
+      class="products-slider__right-btn"
+      @click="onArrowButtonClickNextHandler"
+      type="right"/>
+    <div
+      class="products-slider__list"
+      :style="{ transform: `translate3d(${transformPx}px, 0px, 0px) `,
+      width:`${listWidth}px`}"
+    >
       <Product
         v-if="list.length"
         @addProduct="addProductToCart"

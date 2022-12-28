@@ -28,7 +28,7 @@
       :banner="saleBanner"
     />
     <Comments
-      class="main-page__comments"
+      class="main-page__comments "
       :comments="comments"
     />
   </div>
@@ -94,9 +94,9 @@ export default {
   max-width: 1920px;
   min-width: 320px;
   margin: 0 auto;
-
+  animation: ease-in 1s aniTransition;
   @media screen and (max-width: $mediaMWidth) {
-    margin: 80px auto 20px auto;
+    //margin: 80px auto 20px auto;
   }
   // global
   .container {
@@ -107,7 +107,10 @@ export default {
   // slider
   &__slider {
     margin: 30px 15px;
-    animation: ease-in 0.3s aniFromRight;
+    animation: ease-in 1s aniTransition;
+    @media screen and (max-width: $mediaMWidth) {
+      margin: 15px 0;
+    }
   }
 
   //  /slider
@@ -115,7 +118,15 @@ export default {
   &__features {
     display: flex;
     flex-wrap: wrap;
-    animation: ease-in 1s aniFromLeft;
+    animation: ease-in 1s aniTransition;
+    @media screen and (max-width: $mediaMWidth) {
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   //  /features
@@ -123,12 +134,24 @@ export default {
   &__category-banners {
     display: flex;
     justify-content: center;
+
+
     @media screen and (max-width: $mediaLWidth) {
       flex-wrap: wrap;
     }
     @media screen and (max-width: $mediaMWidth) {
       .banner {
         flex: 0 1 auto !important;
+        margin: 5px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
       }
     }
   }
@@ -153,6 +176,18 @@ export default {
   // comments
   &__comments {
     margin-top: 45px;
+    @media screen and (max-width: $mediaXlWidth) {
+      margin-top: 45px;
+    }
+    @media screen and (max-width: $mediaLWidth) {
+      margin-top: 35px;
+    }
+    @media screen and (max-width: $mediaMWidth) {
+      margin-top: 25px;
+    }
+    @media screen and (max-width: $mediaSWidth) {
+      margin-top: 15px;
+    }
   }
 
   // /comments
@@ -175,8 +210,17 @@ export default {
   }
   @media screen and (max-width: $mediaSWidth) {
     .container {
-      margin: 5px 5px 0 5px;
+      margin: 15px 5px 0 5px;
     }
+  }
+}
+
+@keyframes aniTransition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

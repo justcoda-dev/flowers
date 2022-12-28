@@ -1,14 +1,34 @@
 <template>
-  <div class="cart-header" ref="cart-header">
-    <ButtonCart :cartCount="cartCount" @click="onShowListToggle"/>
-    <div v-show="showList" class="cart-header__wrapper">
-      <CartProductList class="cart-header__list" v-if="productsList.length"
-                       :list="productsList"/>
+  <div
+    class="cart-header"
+    :class="{'show-list':showList}"
+  >
+    <ButtonCart
+      @click="onShowListToggle"
+      :cartCount="cartCount"
+      ref="cart-btn"
+    />
+    <div
+      v-show="showList"
+      class="cart-header__wrapper"
+      ref="cart-wrapper"
+    >
+      <CartProductList
+        v-if="productsList.length"
+        class="cart-header__list"
+        :list="productsList"
+      />
       <p v-else>Корзина пуста</p>
       <div class="cart-header__buttons">
-        <!--        <ButtonConfirm @click="onConfirm">Підтвердити</ButtonConfirm>-->
-        <span><b>Загальна вартість:</b> {{ cartFullPrice }}грн</span>
-        <ButtonViewCart @click="onViewCart">Корзина</ButtonViewCart>
+        <span>
+          <b>Загальна вартість:</b>
+          {{ cartFullPrice }}грн
+        </span>
+        <ButtonViewCart
+          @click="onViewCart"
+        >
+          Корзина
+        </ButtonViewCart>
       </div>
     </div>
   </div>
@@ -64,10 +84,12 @@ export default {
     }
   },
   mounted() {
-    const container = this.$refs["cart-header"]
-    if (container) {
+    const container = this.$refs["cart-wrapper"]
+    const btn = this.$refs["cart-btn"].$el
+
+    if (container || btn) {
       window.addEventListener("click", (e) => {
-        if (!container.contains(e.target)) {
+        if (!container.contains(e.target) && !btn.contains(e.target)) {
           this.showList = false
         }
       })
@@ -79,11 +101,30 @@ export default {
 <style lang="scss" scoped>
 @import "assets/variables";
 
+.show-list {
+  @media screen and (max-width: $mediaMWidth) {
+    &:before {
+      position: fixed;
+      display: block;
+      content: "";
+      width: 100%;
+      height: 100vh;
+      background: #333333;
+      opacity: .95;
+      left: 0;
+      bottom: 0;
+      top: 0;
+      z-index: -1;
+    }
+  }
+}
+
 .cart-header {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+
 
   &__wrapper {
     background: $white;
@@ -95,9 +136,18 @@ export default {
     top: 80px;
     width: 400px;
     padding: 10px;
-    box-shadow: 2px 2px 4px #333333;
-    @media screen and (max-width: $mediaSWidth) {
-      width: 250px;
+    border: 1px solid #f2f2f2;
+    max-height: 300px;
+    box-sizing: border-box;
+
+    @media screen and (max-width: $mediaMWidth) {
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-height: 100%;
+      box-sizing: border-box;
+      position: fixed;
+
     }
   }
 

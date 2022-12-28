@@ -6,6 +6,7 @@
         type="number"
         maxlength="13"
         @input="onInput"
+        inputmode="numeric"
         :placeholder="placeholder"
       >
     </div>

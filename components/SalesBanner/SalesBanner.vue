@@ -47,14 +47,31 @@ export default {
   display: flex;
   height: 450px;
   background: $bodyBackground;
+
   @media screen and (max-width: $mediaSWidth) {
     height: 350px;
   }
+  @media screen and (max-width: $mediaMWidth) {
+    &:before {
+      position: absolute;
+      content: "";
+      background: #ffffff;
+      opacity: .4;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  }
+
 
   &__image {
     object-fit: cover;
     object-position: center;
     width: 100%;
+    @media screen and (max-width: $mediaMWidth) {
+      filter: blur(2px);
+    }
+
   }
 
   &__text-block {
@@ -62,12 +79,15 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 60%;
     height: 100%;
+    padding-right: 30px;
     right: 0;
     position: absolute;
     @media screen and (max-width: $mediaMWidth) {
       width: 100%;
+      padding: 0;
+      z-index: 2;
     }
   }
 

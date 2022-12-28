@@ -1,8 +1,19 @@
 <template>
   <div class="mobile-menu">
-    <MobileButton :checkedProp="showMenu" @change="showToggle" class="mobile-menu__button"/>
-    <div v-if="showMenu" class="mobile-menu__nav-list-background">
-      <MobileNavList @click="onMenuItemClick" :list="list" class="mobile-menu__nav-list"/>
+    <MobileButton
+      class="mobile-menu__button"
+      @change="showToggle"
+      :checkedProp="showMenu"
+    />
+    <div
+      v-if="showMenu"
+      class="mobile-menu__nav-list-background"
+    >
+      <MobileNavList
+        class="mobile-menu__nav-list"
+        @click="onMenuItemClick"
+        :list="list"
+      />
     </div>
   </div>
 </template>
@@ -42,10 +53,11 @@ export default {
 
 .mobile-menu {
   z-index: 10;
+
   &__nav-list-background {
     position: fixed;
-    height: calc(100vh + 30px);
-    width: calc(100vw + 30px);
+    height: 100%;
+    width: 100%;
     left: 0;
     top: 0;
     overflow: hidden;

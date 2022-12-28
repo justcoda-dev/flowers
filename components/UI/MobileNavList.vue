@@ -1,6 +1,11 @@
 <template>
   <ul class="mobile-nav-list">
-    <li class="mobile-nav-list__item" @click="onNavItemClick" v-for="item of list" :key="item.id">
+    <li
+      class="mobile-nav-list__item"
+      @click="onNavItemClick"
+      v-for="item of list"
+      :key="item.id"
+    >
       <NuxtLink
         class="mobile-nav-list__item-src"
         :to="item.to">
@@ -34,6 +39,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 0;
   margin: 0;
   color: $white;
@@ -45,8 +51,7 @@ export default {
     z-index: 1;
     transition: .3s;
     text-transform: uppercase;
-    padding: 5px;
-
+    padding: 10px 5px;
   }
 
   &__item-src {

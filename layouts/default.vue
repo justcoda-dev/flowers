@@ -1,10 +1,12 @@
 <template>
   <div class='layout'>
-    <Header class="header-animation" :navList="navList"
-            :cartFullPrice="getCartFullPrice"
-            :cart="getCart"
-            :cartCount="getCartCount"
-            :socialList="socialList"
+    <Header
+      class="header-animation"
+      :navList="navList"
+      :cartFullPrice="getCartFullPrice"
+      :cart="getCart"
+      :cartCount="getCartCount"
+      :socialList="socialList"
     />
     <div class='content'>
       <Nuxt/>
@@ -31,7 +33,7 @@ export default {
         {id: 1, to: "/", title: "Головна"},
         {id: 2, to: "/flower-pots", title: "Кімнатні рослини"},
         {id: 3, to: "/cart", title: "Корзина"}],
-        // {id: 4, to: "/contacts", title: "Контакти"}],
+      // {id: 4, to: "/contacts", title: "Контакти"}],
       socialList: [
         {
           id: 1,
@@ -73,23 +75,38 @@ export default {
   height: 100%;
   background: $mainBackground;
   margin: 25px;
-  //position: relative;
   @media screen and (max-width: $mediaMWidth) {
     margin: 10px;
   }
+
   .header-animation {
-    animation: ease-in-out 0.5s aniFromTop;
+    animation: ease-in-out .3s aniFromTop;
   }
+
   .content {
     flex: 1 0 auto;
+    animation: aniOpacity .3s ease-in-out;
+    @media screen and (max-width: $mediaMWidth) {
+     margin-top: 50px;
+    }
   }
 }
+
 @keyframes aniFromTop {
   0% {
     transform: translateY(-100%);
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes aniOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>
