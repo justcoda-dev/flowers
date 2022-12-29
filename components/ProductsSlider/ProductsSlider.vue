@@ -98,29 +98,6 @@ export default {
       deep: true
     }
   },
-  mounted() {
-    this.$refs['slider-wrapper'].addEventListener("touchstart", (e) => {
-      this.x = e.touches[0].clientX
-      this.y = e.touches[0].clientY
-    })
-    this.$refs['slider-wrapper'].addEventListener("touchmove", (e) => {
-      if (!this.x || !this.y) {
-        return false
-      }
-      let x2 = e.touches[0].clientX
-      let y2 = e.touches[0].clientY
-      let xDiff = x2 - this.x
-      let yDiff = y2 - this.y
-
-      if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0) {
-          this.onArrowButtonClickNextHandler()
-        } else {
-          this.onArrowButtonClickPreviousHandler()
-        }
-      }
-    })
-  }
 }
 </script>
 
