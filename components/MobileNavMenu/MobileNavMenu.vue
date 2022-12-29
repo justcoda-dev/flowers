@@ -83,6 +83,7 @@ export default {
   &__button {
     position: relative;
     z-index: 12;
+    top: 10px;
   }
 }
 </style>

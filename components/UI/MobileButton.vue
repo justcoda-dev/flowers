@@ -45,7 +45,7 @@ export default {
 .mobile-button-checkbox {
   display: flex;
   flex-direction: column;
-  width: 70px;
+  width: 65px;
   cursor: pointer;
 
   &__checkbox {
@@ -55,8 +55,8 @@ export default {
   &__line {
     background: #fff;
     border-radius: 10px;
-    height: 7px;
-    margin: 7px 0;
+    height: 6px;
+    margin: 5px 0;
     transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 
     &:nth-of-type(1) {
@@ -79,7 +79,7 @@ export default {
     &__line {
       &:nth-of-type(1) {
         transform-origin: bottom;
-        transform: rotatez(45deg) translate(8px, 0px)
+        transform: rotatez(45deg) translate(4px, 0px)
       }
 
       &:nth-of-type(2) {
@@ -90,7 +90,7 @@ export default {
       &:nth-of-type(3) {
         transform-origin: bottom;
         width: 50%;
-        transform: translate(30px, -11px) rotatez(45deg);
+        transform: translate(27px, -6px) rotatez(45deg);
       }
     }
   }
