@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="list.length"
+    v-if="list"
     class="products-slider"
     ref="slider-wrapper"
   >
@@ -18,7 +18,7 @@
       width:`${listWidth}px`}"
     >
       <Product
-        v-if="list.length"
+        v-if="list"
         @addProduct="addProductToCart"
         ref="product"
         class="products-slider__item"
@@ -53,7 +53,9 @@ export default {
       listWidth: 0,
       sliderWrapperWidth: 0,
       elementsInLine: 0,
-      productsLength: 0
+      productsLength: 0,
+      x: null,
+      y: null
     }
   },
   methods: {
@@ -96,6 +98,60 @@ export default {
       deep: true
     }
   },
+  mounted() {
+    this.$refs['slider-wrapper'].addEventListener("touchstart", (e) => {
+
+      this.x = e.touches[0].clientX
+      this.y = e.touches[0].clientY
+    })
+    this.$refs['slider-wrapper'].addEventListener("touchmove", (e) => {
+      if (!this.x || !this.y) {
+        return false
+      }
+      let x2 = e.touches[0].clientX
+      let y2 = e.touches[0].clientY
+
+      let xDiff = x2 - this.x
+      let yDiff = y2 - this.y
+
+      if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+          // console.log("right", xDiff)
+          {
+            if (this.transformPx >= 0 && this.productsLength >= this.elementsInLine) {
+              this.transformPx = -this.maxLength + (this.elementsInLine * this.elementWidth)
+            } else if (this.transformPx < 0) {
+              this.transformPx = this.transformPx + 4
+            } else {
+              return
+            }
+          }
+        } else {
+          // console.log("left", xDiff)
+          {
+            if (this.transformPx > 0 && this.productsLength >= this.elementsInLine) {
+              this.transformPx = -this.maxLength + (this.elementsInLine * this.elementWidth)
+            } else if (this.transformPx > -this.maxLength + (this.elementsInLine * this.elementWidth)) {
+              this.transformPx = this.transformPx - 4
+            } else if (this.transformPx <= -this.elementWidth) {
+              this.transformPx = 0
+            } else {
+              return
+            }
+          }
+
+        }
+
+      } else {
+        if (yDiff > 0) {
+          // console.log("down")
+        } else {
+          // console.log("top")
+        }
+      }
+
+    })
+  }
 
 }
 </script>
