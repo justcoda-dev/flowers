@@ -121,7 +121,7 @@ export default {
             if (this.transformPx >= 0 && this.productsLength >= this.elementsInLine) {
               this.transformPx = -this.maxLength + (this.elementsInLine * this.elementWidth)
             } else if (this.transformPx < 0) {
-              this.transformPx = this.transformPx + 10
+              this.transformPx = this.transformPx + 20
             } else {
               return
             }
@@ -132,7 +132,7 @@ export default {
             if (this.transformPx > 0 && this.productsLength >= this.elementsInLine) {
               this.transformPx = -this.maxLength + (this.elementsInLine * this.elementWidth)
             } else if (this.transformPx > -this.maxLength + (this.elementsInLine * this.elementWidth)) {
-              this.transformPx = this.transformPx - 10
+              this.transformPx = this.transformPx - 20
             } else if (this.transformPx <= -this.elementWidth) {
               this.transformPx = 0
             } else {
