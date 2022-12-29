@@ -5,7 +5,7 @@ export const features = {
     id: 2, title: "Доставка квітів", image: `${require(`assets/icons/cargo-truck.png`)}`
   }, {
     id: 3,
-    title: "Завжди на звя'зку +38096 901 86 77",
+    title: "Завжди на звя'зку",
     image: `${require(`assets/icons/phone-call.png`)}`
   }, {
     id: 4, title: "Тільки свіжі рослини!", image: `${require(`assets/icons/bouquet.png`)}`

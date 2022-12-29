@@ -11,7 +11,8 @@
       >
       <div class='autocomplete-select__buttons-wrapper'>
         <button v-if="inputValue" @click="cancelValue" class='button autocomplete-select__cancel'/>
-        <button v-if="inputValue" @click.prevent="openList" class='button autocomplete-select__open'/>
+        <button v-if="inputValue" @click.prevent="openList"
+                class='button autocomplete-select__open'/>
       </div>
       <ul
         v-if="list && showList"
@@ -88,6 +89,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import "assets/variables";
+
 .autocomplete-select {
   color: #60666d;
   // global styles
@@ -111,7 +114,7 @@ export default {
 
     padding: 15px 10px;
     background: #ffffff;
-    box-shadow: 0 0 5px #afadad;
+    border: 1px solid $borderColor;
 
   }
 

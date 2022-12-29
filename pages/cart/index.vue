@@ -68,9 +68,7 @@ export default {
 @import "assets/variables";
 
 .cart {
-  @media screen and (max-width: $mediaMWidth) {
-    margin-top: 50px;
-  }
+
 }
 
 .success {

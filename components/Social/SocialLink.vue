@@ -1,7 +1,9 @@
 <template>
   <a class="link" :href="social.link" target="_blank">
-    <img class="link__image"
-         :src="social.icon">
+    <img
+      class="link__image"
+      :src="social.icon"
+    >
   </a>
 </template>
 

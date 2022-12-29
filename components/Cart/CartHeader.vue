@@ -27,7 +27,7 @@
         <ButtonViewCart
           @click="onViewCart"
         >
-          Корзина
+          Оформити
         </ButtonViewCart>
       </div>
     </div>
@@ -136,7 +136,7 @@ export default {
     top: 80px;
     width: 400px;
     padding: 10px;
-    border: 1px solid #f2f2f2;
+    border: 1px solid $borderColor;
     max-height: 300px;
     box-sizing: border-box;
 

@@ -96,7 +96,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  border: 1px solid $bodyBackground;
+  border: 1px solid $borderColor;
   border-radius: 5px;
   max-width: 200px;
 

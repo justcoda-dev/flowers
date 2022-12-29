@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/variables";
 
 .cart-list {
   list-style: none;
@@ -40,7 +41,7 @@ export default {
   &__item {
     display: flex;
     padding: 10px;
-    border: 1px solid #ecf7f9;
+    border: 1px solid $borderColor;
     margin: 5px 0;
     border-radius: 5px;
   }

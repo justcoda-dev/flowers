@@ -60,6 +60,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/variables";
+
 input[type='number'] {
   -moz-appearance: textfield;
 }
@@ -75,7 +77,8 @@ input::-webkit-inner-spin-button {
     min-width: 170px;
     padding: 15px 10px;
     background: #ffffff;
-    box-shadow: 0 0 5px #afadad;
+    border: 1px solid $borderColor;
+    //box-shadow: 0 0 5px #afadad;
   }
 
   &__input {
